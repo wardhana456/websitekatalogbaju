@@ -40,6 +40,13 @@
       color: white;
     }
 
+    .icon-shop {
+          background: none;
+      border: none;
+      font-size: 50px;
+      color: white;
+    }
+
       .section-title {
       font-weight: bold;
       font-size: 1.5rem;
@@ -63,42 +70,50 @@
       object-fit: cover;
       height: 200px;
     }
+  .product-card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+  }
 
-    .category-row img {
-      margin-bottom: 10px;
-    }
+  .product-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  .product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.20);
+  }
 
-        .product-scroll {
-      overflow-x: auto;
-      white-space: nowrap;
-      padding-bottom: 10px;
-    }
+  .product-card p {
+    font-weight: bold;
+    margin: 0 0 5px;
+    color: #28a745;
+  }
 
-    .product-card {
-      display: inline-block;
-      width: 200px;
-      margin-right: 20px;
-      vertical-align: top;
-    }
+  .rating {
+    color: orange;
+    font-size: 0.9rem;
+  }
 
-    .product-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: contain;
-      background-color: #f8f9fa;
-      border-radius: 5px;
-    }
+  .btn-load {
+    display: block;
+    margin: 40px auto 0;
+    padding: 10px 10px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background 0.3s;
+    
+  }
 
-    .star-rating {
-      color: orange;
-    }
-
-    /* Optional: hide scrollbar in webkit */
-    .product-scroll::-webkit-scrollbar {
-      height: 8px;
-    }
-
-    .product-scroll::-webkit-scrollbar-thumb {
-      background-color: #ccc;
-      border-radius: 4px;
-    }
+  .btn-load:hover {
+    background-color: #858181;
+  }
