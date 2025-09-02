@@ -1,0 +1,104 @@
+    .navbar-gradient {
+      background: linear-gradient(
+        rgba(0, 0, 0, 0.979) 0%,   /* atas hitam pekat */
+        rgba(0, 0, 0, 0.4) 60%, /* tengah agak transparan */
+        rgba(0, 0, 0, 0) 100%   /* bawah full transparan */
+      ) !important;
+    }
+    .navbar-gradient .nav-link,
+    .navbar-gradient .navbar-brand {
+      color: white !important;
+    }
+    .navbar-gradient .nav-link:hover {
+      color: #ffcc00 !important;
+    }
+
+    .nav-link.beranda {
+  margin-right: 60px; /* atur sesuai selera */
+  font-weight: bold;
+}
+
+    .search-container {
+      background-color: #e0e0e0;
+      border-radius: 20px;
+      padding: 5px 10px;
+      display: flex;
+      max-width: 70%;
+      width: 100%;
+      align-items: center;
+    }
+    .search-input {
+      border: none;
+      background: transparent;
+      outline: none;
+      flex: 1;
+    }
+    .icon-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+      .section-title {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .product-img {
+      width: 100%;
+      max-height: 150px;
+      object-fit: contain;
+    }
+
+    .sale-img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+      height: 200px;
+    }
+
+    .category-row img {
+      margin-bottom: 10px;
+    }
+
+        .product-scroll {
+      overflow-x: auto;
+      white-space: nowrap;
+      padding-bottom: 10px;
+    }
+
+    .product-card {
+      display: inline-block;
+      width: 200px;
+      margin-right: 20px;
+      vertical-align: top;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      background-color: #f8f9fa;
+      border-radius: 5px;
+    }
+
+    .star-rating {
+      color: orange;
+    }
+
+    /* Optional: hide scrollbar in webkit */
+    .product-scroll::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .product-scroll::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 4px;
+    }
