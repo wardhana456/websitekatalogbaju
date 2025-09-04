@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg fixed-top navbar-gradient">
+        <div class="container-fluid">
+        <!-- Logo -->
+            <a class="navbar-brand" href="#">
+            <img src="foto/ThriftPay (1).png" 
+            alt="Logo" width="160" height="auto" 
+            class="d-inline-block align-text-top">
+            </a>
+
+        <!-- Tombol garis tiga (hamburger) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+        <!-- Menu -->
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active fw-bold" href="index.html">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="produk.html">Produk</a>
+                </li>
+            </ul>
+        </div>
+        </div>
+
+        <div class="topbar">
+            <div class="icon"><i class="bi bi-person-circle"></i></div>
+            <div class="search-box">
+                <input type="text" placeholder="Search..." />
+                <i class="bi bi-search"></i>
+            </div>
+            <div class="icon"><i class="bi bi-bag"></i></div>
+        </div>
+    </nav>
+
+    <section>
+        <div class="highlight">
+            <div class="wrap">
+               <div class="image-wrapper">
+  <img id="mainImage" src="foto/baju1.jpg" alt="Gambar utama">
+</div>
+                <div class="thumbnails">
+                    <img src="foto/baju1.jpg" alt="thumb1" onclick="changeImage('foto/baju1.jpg')">
+                    <img src="foto/baju3.jpg" alt="thumb2" onclick="changeImage('foto/baju3.jpg')">
+                    <img src="foto/baju4.jpg" alt="thumb3" onclick="changeImage('foto/baju4.jpg')">
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+ 
+
+
+  <h3>ONE LIFE GRAPHIC THRIFT</h3>
+    <div class="price">
+      $1399 <span class="old">$1499</span>
+    </div>
+    
+
+    <P>Kaos polos adalah pilihan sempurna bagi kamu yang menyukai tampilan simpel, bersih, dan serbaguna. Dibuat dari bahan katun berkualitas tinggi yang lembut, adem, dan nyaman di kulit, kaos ini cocok digunakan untuk aktivitas harian maupun sebagai inner outfit. </P>
+
+        <div class="add-to-cart">
+      <div class="qty">
+        <button onclick="changeQty(-1)">-</button>
+        <span id="qty">1</span>
+        <button onclick="changeQty(1)">+</button>
+      </div>
+      <button class="add-button">Add to Cart</button>
+    </div>
+  </div>
+
+    <div>
+      <strong>Choose Size:</strong>
+      <div class="size-options">
+        <div class="size-button" onclick="selectSize(this)">S</div>
+        <div class="size-button" onclick="selectSize(this)">M</div>
+        <div class="size-button" onclick="selectSize(this)">L</div>
+        <div class="size-button" onclick="selectSize(this)">XL</div>
+      </div>
+    </div>
+
+    <body class="bg-light">
+
+  <div class="container my-5">
+    <div class="rounded p-4 ">
+      <h5 class="text-center mb-4 fw-bold">Reviews</h5>
+
+      <!-- Review 1 -->
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <div class="star-rating mb-2">★★★★★</div>
+          <h6 class="card-title fw-bold d-flex align-items-center">
+            wardhana
+            <img src="https://cdn-icons-png.flaticon.com/512/2950/2950611.png" alt="Verified" class="verified-icon">
+          </h6>
+          <p class="card-text">
+            "Terima kasih telah melakukan pemesanan! Baju kamu sudah kami beli dan sedang dalam proses pengemasan.
+            Kami akan kirim secepatnya dan update resi segera ya 😊"
+          </p>
+          <p class="text-muted small">Agustus 19, 2025</p>
+        </div>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <div class="star-rating mb-2">★★★★★</div>
+          <h6 class="card-title fw-bold d-flex align-items-center">
+            wardhana
+            <img src="https://cdn-icons-png.flaticon.com/512/2950/2950611.png" alt="Verified" class="verified-icon">
+          </h6>
+          <p class="card-text">
+            "Terima kasih telah melakukan pemesanan! Baju kamu sudah kami beli dan sedang dalam proses pengemasan.
+            Kami akan kirim secepatnya dan update resi segera ya 😊"
+          </p>
+          <p class="text-muted small">Agustus 19, 2025</p>
+        </div>
+      </div>
+
+            <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <div class="star-rating mb-2">★★★★★</div>
+          <h6 class="card-title fw-bold d-flex align-items-center">
+            wardhana
+            <img src="https://cdn-icons-png.flaticon.com/512/2950/2950611.png" alt="Verified" class="verified-icon">
+          </h6>
+          <p class="card-text">
+            "Terima kasih telah melakukan pemesanan! Baju kamu sudah kami beli dan sedang dalam proses pengemasan.
+            Kami akan kirim secepatnya dan update resi segera ya 😊"
+          </p>
+          <p class="text-muted small">Agustus 19, 2025</p>
+        </div>
+      </div>
+
+            <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <div class="star-rating mb-2">★★★★★</div>
+          <h6 class="card-title fw-bold d-flex align-items-center">
+            wardhana
+            <img src="https://cdn-icons-png.flaticon.com/512/2950/2950611.png" alt="Verified" class="verified-icon">
+          </h6>
+          <p class="card-text">
+            "Terima kasih telah melakukan pemesanan! Baju kamu sudah kami beli dan sedang dalam proses pengemasan.
+            Kami akan kirim secepatnya dan update resi segera ya 😊"
+          </p>
+          <p class="text-muted small">Agustus 19, 2025</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+    
+    <script>
+    function changeImage(imageSrc) {
+      document.getElementById('mainImage').src = imageSrc;
+    }
+
+       function selectSize(el) {
+      document.querySelectorAll('.size-button').forEach(e => e.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+        function changeQty(val) {
+      let qty = parseInt(document.getElementById('qty').innerText);
+      qty = Math.max(1, qty + val); // minimal 1
+      document.getElementById('qty').innerText = qty;
+    }
+
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
