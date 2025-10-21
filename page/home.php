@@ -32,134 +32,149 @@
 <div class="parent">
     <div class="div1"><img src="foto/promosi1.jpg" alt=""></div>
     <div class="div2"><img src="foto/promosi1.jpg" alt=""></div>
-    <div class="div3"><img src="foto/promosi1.jpg" alt=""></div>
+  
 </div>
     
      <div class="text-center mb-4">
       <h3><strong>TRENDING</strong></h3>
       <p>Lorem Ipsum</p>
-      <div class="product-grid ">
+     <div class="product-grid">
       <!-- 8 produk contoh -->
   
-
+<!-- ========== PRODUCT GRID ========== -->
+ <!-- ========== PRODUCT GRID ========== -->
+<div class="container mt-4">
   <div class="row g-4">
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-       <a href="detailproduk.html" class="text-decoration-none text-dark">
-      <div class="product-card text-center">
-        <img src="foto/baju1.jpg" alt="Baju 1">
-        <h3>Kaos Urban</h3>
-        <p>IDR 99.000</p>
-        <span class="rating">★★★★★</span></a>
+    
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="product-card">
+        <img src="foto/produk1.jpg" alt="Produk 1">
+        <h5>Jaket Denim Oversize</h5>
+        <p>Rp 120.000</p>
+        <div class="rating">★★★★☆</div>
+        <button>Tambah ke Keranjang</button>
       </div>
     </div>
 
-
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="product-card text-center">
-        <img src="foto/baju1.jpg" alt="Baju 2">
-        <h3>Kaos Retro</h3>
-        <p>IDR 110.000</p>
-        <span class="rating">★★★★★</span>
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="product-card">
+        <img src="foto/produk2.jpg" alt="Produk 2">
+        <h5>Kaos Vintage 90s</h5>
+        <p>Rp 80.000</p>
+        <div class="rating">★★★★★</div>
+        <button>Tambah ke Keranjang</button>
       </div>
     </div>
 
-      <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card text-center">
-        <img src="foto/baju1.jpg" alt="Baju 2">
-        <h3>Kaos Retro</h3>
-        <p>IDR 110.000</p>
-        <span class="rating">★★★★★</span>
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="product-card">
+        <img src="foto/produk3.jpg" alt="Produk 3">
+        <h5>Celana Cargo Coklat</h5>
+        <p>Rp 100.000</p>
+        <div class="rating">★★★★☆</div>
+        <button>Tambah ke Keranjang</button>
       </div>
     </div>
 
-     <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card text-center">
-        <img src="foto/baju1.jpg" alt="Baju 2">
-        <h3>Kaos Retro</h3>
-        <p>IDR 110.000</p>
-        <span class="rating">★★★★★</span>
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="product-card">
+        <img src="foto/produk4.jpg" alt="Produk 4">
+        <h5>Kemeja Flanel Classic</h5>
+        <p>Rp 90.000</p>
+        <div class="rating">★★★★★</div>
+        <button>Tambah ke Keranjang</button>
       </div>
     </div>
 
-
-    <div class="row g-4">
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="product-card text-center">
-        <img src="foto/baju1.jpg" alt="Baju 1">
-        <h3>Kaos Urban</h3>
-        <p>IDR 99.000</p>
-        <span class="rating">★★★★★</span>
+        <div class="col-12 col-sm-6 col-lg-3">
+      <div class="product-card">
+        <img src="foto/produk1.jpg" alt="Produk 1">
+        <h5>Jaket Denim Oversize</h5>
+        <p>Rp 120.000</p>
+        <div class="rating">★★★★☆</div>
+        <button>Tambah ke Keranjang</button>
       </div>
     </div>
 
-
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="product-card text-center">
-        <img src="foto/baju1.jpg" alt="Baju 2">
-        <h3>Kaos Retro</h3>
-        <p>IDR 110.000</p>
-        <span class="rating">★★★★★</span>
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="product-card">
+        <img src="foto/produk2.jpg" alt="Produk 2">
+        <h5>Kaos Vintage 90s</h5>
+        <p>Rp 80.000</p>
+        <div class="rating">★★★★★</div>
+        <button>Tambah ke Keranjang</button>
       </div>
     </div>
 
-      <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card text-center">
-        <img src="foto/baju1.jpg" alt="Baju 2">
-        <h3>Kaos Retro</h3>
-        <p>IDR 110.000</p>
-        <span class="rating">★★★★★</span>
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="product-card">
+        <img src="foto/produk3.jpg" alt="Produk 3">
+        <h5>Celana Cargo Coklat</h5>
+        <p>Rp 100.000</p>
+        <div class="rating">★★★★☆</div>
+        <button>Tambah ke Keranjang</button>
       </div>
     </div>
 
-     <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card text-center">
-        <img src="foto/baju1.jpg" alt="Baju 2">
-        <h3>Kaos Retro</h3>
-        <p>IDR 110.000</p>
-        <span class="rating">★★★★★</span>
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="product-card">
+        <img src="foto/produk4.jpg" alt="Produk 4">
+        <h5>Kemeja Flanel Classic</h5>
+        <p>Rp 90.000</p>
+        <div class="rating">★★★★★</div>
+        <button>Tambah ke Keranjang</button>
       </div>
     </div>
 
-
-      <div class="row g-4">
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="product-card text-center">
-        <img src="foto/baju1.jpg" alt="Baju 1">
-        <h3>Kaos Urban</h3>
-        <p>IDR 99.000</p>
-        <span class="rating">★★★★★</span>
+        <div class="col-12 col-sm-6 col-lg-3">
+      <div class="product-card">
+        <img src="foto/produk1.jpg" alt="Produk 1">
+        <h5>Jaket Denim Oversize</h5>
+        <p>Rp 120.000</p>
+        <div class="rating">★★★★☆</div>
+        <button>Tambah ke Keranjang</button>
       </div>
     </div>
 
-
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="product-card text-center">
-        <img src="foto/baju1.jpg" alt="Baju 2">
-        <h3>Kaos Retro</h3>
-        <p>IDR 110.000</p>
-        <span class="rating">★★★★★</span>
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="product-card">
+        <img src="foto/produk2.jpg" alt="Produk 2">
+        <h5>Kaos Vintage 90s</h5>
+        <p>Rp 80.000</p>
+        <div class="rating">★★★★★</div>
+        <button>Tambah ke Keranjang</button>
       </div>
     </div>
 
-      <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card text-center">
-        <img src="foto/baju1.jpg" alt="Baju 2">
-        <h3>Kaos Retro</h3>
-        <p>IDR 110.000</p>
-        <span class="rating">★★★★★</span>
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="product-card">
+        <img src="foto/produk3.jpg" alt="Produk 3">
+        <h5>Celana Cargo Coklat</h5>
+        <p>Rp 100.000</p>
+        <div class="rating">★★★★☆</div>
+        <button>Tambah ke Keranjang</button>
       </div>
     </div>
 
-     <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card text-center">
-        <img src="foto/baju1.jpg" alt="Baju 2">
-        <h3>Kaos Retro</h3>
-        <p>IDR 110.000</p>
-        <span class="rating">★★★★★</span>
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="product-card">
+        <img src="foto/produk4.jpg" alt="Produk 4">
+        <h5>Kemeja Flanel Classic</h5>
+        <p>Rp 90.000</p>
+        <div class="rating">★★★★★</div>
+        <button>Tambah ke Keranjang</button>
       </div>
     </div>
-    <!-- dan seterusnya... -->
-    </div>
+
+    <!-- Tambah produk lainnya di sini -->
+    
+  </div>
+</div>
+
+
+    
+  
+
     <button class="btn-load ">Load More</button>
     </div>
     </div>

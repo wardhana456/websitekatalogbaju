@@ -1,11 +1,10 @@
-<head>
-<?php include 'component/header.php'; ?>
-</head>
-<body>
-  
-    <?php include 'component/navbar.php'; ?>
-    <?php include 'component/carausel.php'; ?>
-    <?php include 'page/home.php'; ?>
-    <?php include 'component/footer.php'; ?>
-</body>
-</html>
+<?php
+include 'component/header.php';         // Memanggil header
+include 'component/navbar.php'; // Memanggil komponen navbar
+include 'component/carausel.php';   // Memanggil komponen shop
+?>
+
+
+<?php
+include 'page/home.php';         // Memanggil footer
+?>
