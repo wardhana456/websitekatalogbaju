@@ -102,6 +102,36 @@
 /* ===========================
    PRODUCT SECTION
 =========================== */
+.product-card h5 {
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.product-card .rating {
+  color: #f8b400;
+  margin-bottom: 10px;
+}
+
+.product-card button {
+  background: #000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.product-card button:hover {
+  background: #ffcc00;
+  color: #000;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
 .parents {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -135,18 +165,25 @@
 .product-card {
   background-color: #fff;
   padding: 15px;
-  border-radius: 8px;
   white-space: normal;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  padding-bottom: 15px;
+  height: 100%; /* agar card sama tinggi */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .product-card img {
   width: 100%;
-  height: 300px;
   object-fit: cover;
   border-radius: 5px;
   margin-bottom: 10px;
+  height: 250px;
 }
 
 .product-card:hover {
@@ -155,9 +192,10 @@
 }
 
 .product-card p {
-  font-weight: bold;
   margin: 0 0 5px;
   color: #28a745;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 
 .rating {
@@ -177,8 +215,9 @@
 }
 
 .btn-load:hover {
-  background-color: #ffffff;
+  background-color: #f8b400;
   color: #000;
+  margin-bottom: 10px;
 }
 
 /* ===========================
@@ -375,79 +414,24 @@ p {
   margin: 30px 0;
 }
 
-    .filters button {
-      margin: 5px;
-      padding: 8px 16px;
-      border: none;
-      border-radius: 20px;
-      background-color: #000;
-      color: white;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .filters button:hover {
-      background-color: #ffcc00;
-      color: #000;
-    }
-
-    /* ========== PRODUCT GRID ========== */
-    .product-card {
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
-  padding-bottom: 15px;
-  height: 100%; /* agar card sama tinggi */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.filters button {
+ margin: 5px;
+ padding: 8px 16px;
+ border: none;
+ border-radius: 20px;
+ background-color: #000;
+ color: white;
+ font-weight: 500;
+ cursor: pointer;
+ transition: all 0.3s;
 }
 
-.product-card img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
+.filters button:hover {
+ background-color: #ffcc00;
+ color: #000;
 }
 
-.product-card h5 {
-  margin: 10px 0 5px;
-  font-weight: bold;
-}
-
-.product-card p {
-  color: #28a745;
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-
-.product-card .rating {
-  color: #f8b400;
-  margin-bottom: 10px;
-}
-
-.product-card button {
-  background: #000;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 16px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.product-card button:hover {
-  background: #ffcc00;
-  color: #000;
-}
-
-.product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
+  
 
 
 /* ===========================

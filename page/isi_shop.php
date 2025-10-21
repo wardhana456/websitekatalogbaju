@@ -1,41 +1,18 @@
-<div class="container mt-5 mb-5"> <!-- ini memberi margin atas dan bawah -->
-  <div class="section-title mb-2">Kategori</div>
-  <p class="subtitle">Deskripsi Kategori</p>
-  <!-- isi kategori -->
-         <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 g-3 category-row">
-        <div class="col">
-          <img src="foto/baju1.jpg" class="product-img" alt="Kategori 1">
-        </div>
-        <div class="col">
-          <img src="foto/baju2.png" class="product-img" alt="Kategori 2">
-        </div>
-        <div class="col">
-          <img src="foto/baju3.jpg" class="product-img" alt="Kategori 3">
-        </div>
-        <div class="col">
-          <img src="foto/baju4.jpg" class="product-img" alt="Kategori 4">
-        </div>
-        <div class="col">
-          <img src="foto/baju5.webp" class="product-img" alt="Kategori 5">
-        </div>
-      </div>
-    </div>
-</div>
+ <section class="shop-header">
+    <h1>Our Collections</h1>
+    <p>Temukan pakaian thrift berkualitas dengan harga terbaik.</p>
+  </section>
 
-<div class="container mb-5"> <!-- Jarak bawah antar section -->
-  <div class="section-title mb-2">Today Sale!!</div>
-  <p class="subtitle">Deskripsi Sale</p>
-  <!-- isi sale -->
-  
+  <!-- ========== FILTER BUTTONS ========== -->
+  <div class="filters">
+    <button>Semua</button>
+    <button>Pria</button>
+    <button>Wanita</button>
+    <button>Aksesoris</button>
+    <button>Diskon</button>
+  </div>
 
-
-<div class="parent">
-    <div class="div1"><img src="foto/promosi1.jpg" alt=""></div>
-    <div class="div2"><img src="foto/promosi1.jpg" alt=""></div>
-  
-</div>
-    
-     <div class="text-center mb-4">
+      <div class="text-center mb-4">
       <h3><strong>TRENDING</strong></h3>
       <p>Lorem Ipsum</p>
      <div class="product-grid">
@@ -170,12 +147,3 @@
     
   </div>
 </div>
-
-
-    
-  
-
-    <button class="btn-load ">Load More</button>
-    </div>
-    </div>
-    </div>
