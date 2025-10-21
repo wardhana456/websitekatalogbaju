@@ -1,3 +1,5 @@
+    
+    /* navbar gradient */
     .navbar-gradient {
       background: linear-gradient(
         rgba(0, 0, 0, 0.979) 0%,   /* atas hitam pekat */
@@ -36,33 +38,9 @@
 
 }
 
-.icon {
-  font-size: 1.8rem;
-  color: white;
-  cursor: pointer;
-}
 
-.search-box {
-  display: flex;
-  align-items: center;
-  background-color: #ddd;
-  border-radius: 30px;
-  padding: 5px 15px;
-}
 
-.search-box input {
-  border: none;
-  background: transparent;
-  outline: none;
-  padding: 5px;
-  width: 200px;
-}
 
-.search-box i {
-  font-size: 1.2rem;
-  margin-left: 10px;
-  color: #333;
-}
 
       .section-title {
       font-weight: bold;
@@ -304,3 +282,6 @@ p{
       color: #f8b400;
       font-size: 1.1rem;
     }
+
+
+    /* footer */
