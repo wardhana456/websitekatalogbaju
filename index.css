@@ -3,10 +3,11 @@
 =========================== */
 .navbar-gradient {
   background: linear-gradient(
-    rgba(0, 0, 0, 0.979) 0%,   /* atas hitam pekat */
-    rgba(0, 0, 0, 0.4) 60%,    /* tengah agak transparan */
-    rgba(0, 0, 0, 0) 100%      /* bawah full transparan */
+    rgba(0, 0, 0, 0.979) 0%, 
+    rgba(0, 0, 0, 0.4) 60%, 
+    rgba(0, 0, 0, 0) 100%
   ) !important;
+  transition: all 0.3s ease;
 }
 
 .navbar-gradient .nav-link,
@@ -18,45 +19,37 @@
   color: #ffcc00 !important;
 }
 
-.nav-link.beranda {
-  margin-right: 60px; /* atur sesuai selera */
-  font-weight: bold;
-}
-
 /* ===========================
-   SEARCH BAR
+   SEARCH BOX
 =========================== */
 .search-box {
   display: flex;
   align-items: center;
-  background-color: #ffffff;
+  background-color: #fff;
   border-radius: 25px;
-  padding: 7px 15px;
+  padding: 6px 12px;
   width: 250px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .search-box input {
   border: none;
   outline: none;
   flex: 1;
-  padding: 5px 10px;
+  padding: 5px 8px;
+  font-size: 0.9rem;
   border-radius: 25px;
 }
 
-.topbar {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+.search-box i {
+  color: #000;
 }
 
+/* ===========================
+   ICON STYLE
+=========================== */
 .icon i {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: #fff;
   cursor: pointer;
   transition: color 0.3s ease;
@@ -67,6 +60,16 @@
 }
 
 /* ===========================
+   TOPBAR
+=========================== */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* ===========================
    RESPONSIVE SETTINGS
 =========================== */
 @media (max-width: 992px) {
@@ -74,29 +77,37 @@
     padding: 10px 15px;
   }
 
-  .search-box {
-    width: 100%;
-    margin-top: 10px;
+  /* Saat collapse aktif, beri background hitam pekat */
+  .navbar-collapse {
+  background-color: rgba(0, 0, 0, 0); /* transparan */
+  backdrop-filter: blur(5px); /* opsional, kasih efek blur */
+  border-radius: 10px;
+  padding: 20px 0;
+  transition: background-color 0.3s ease;
+}
+
+
+  .nav-link {
+    color: #fff !important;
+    display: block;
+    padding: 10px 0;
+    font-size: 1rem;
   }
 
   .topbar {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    width: 100%;
+    gap: 15px;
+    margin-top: 10px;
   }
-}
 
+  .search-box {
+    width: 90%;
+  }
 
-
-/* ===========================
-   TOPBAR
-=========================== */
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 10px;
+  .navbar-toggler {
+    border: none;
+  }
 }
 
 /* ===========================
@@ -223,26 +234,50 @@
 /* ===========================
    PRODUCT COLUMN (col)
 =========================== */
+/* Section title dan subtitle */
+.section-title-home {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.subtitle {
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* Grid kategori */
+.category-row {
+  margin-top: 20px;
+}
+
+/* Kolom kategori */
 .col {
-  background-color: #fff;
-  padding: 15px;
-  border-radius: 8px;
-  white-space: normal;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
+  padding: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.col img {
+/* Gambar kategori */
+.product-img {
   width: 100%;
-  height: 300px;
+  height: 240px;
   object-fit: cover;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.col:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 4px 12px rgba(255, 255, 300, 0.5);
+/* Efek hover */
+.col:hover .product-img {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsif */
+@media (max-width: 576px) {
+  .product-img {
+    height: 180px;
+  }
 }
 
 /* ===========================
@@ -308,30 +343,84 @@ body {
 }
 
 /* ===========================
-   IMAGE WRAPPER
+  TODAY SALE SECTION
 =========================== */
-.image-wrapper {
-  width: 500px;
-  max-width: 90vw;
-  height: auto;
-  margin: 0 auto 20px;
-  padding: 10px;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  background-color: #f8f8f8;
-  text-align: center;
+/* Judul & subtitle */
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #222;
 }
 
-.image-wrapper img {
+.subtitle {
+  color: #777;
+  margin-bottom: 25px;
+}
+
+/* ===== KOLASE SALE ===== */
+.sale-collage {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 15px;
+}
+
+/* Item besar di kiri */
+.sale-item.large {
+  grid-row: 1 / span 2; /* memanjang dua baris */
+  grid-column: 1;
+}
+
+/* Foto kanan atas */
+.sale-item.small.top {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+/* Foto kanan bawah */
+.sale-item.small.bottom {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+/* Style gambar */
+.sale-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sale-item img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
+  transition: transform 0.4s ease;
 }
 
-p {
-  max-width: 30%;
-  margin: 0 auto;
+/* Efek hover */
+.sale-item:hover img {
+  transform: scale(1.08);
 }
+
+.sale-item:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+  .sale-collage {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .sale-item.large {
+    grid-row: auto;
+  }
+}
+
 
 /* ===========================
    SIZE & COLOR SELECTOR
@@ -432,9 +521,255 @@ p {
 }
 
   
-
-
 /* ===========================
-   FOOTER (TAMBAHKAN JIKA PERLU)
+  PRODUK
 =========================== */
-/* footer { ... } */
+.section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ff6600;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+
+
+.promo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.promo-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.promo-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(255, 100, 0, 0.3);
+}
+
+.promo-img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  filter: brightness(80%);
+}
+
+.promo-card:hover .promo-img {
+  transform: scale(1.05);
+  filter: brightness(65%);
+}
+
+.promo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+}
+
+.promo-overlay h3 {
+  font-size: 1.3rem;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.promo-overlay p {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.btn-promo {
+  background: linear-gradient(45deg, #ffcc00, #ff8800);
+  border: none;
+  color: white;
+  border-radius: 30px;
+  padding: 8px 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn-promo:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #ffaa00, #ff6600);
+}
+
+.badge-sale {
+  background-color: #ff3300;
+  color: white;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border-radius: 20px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  animation: pulse 1.5s infinite;
+}
+
+/* Bagian Testimoni */
+.testimoni {
+  background: #fff;
+  padding: 60px 20px;
+}
+
+.testimoni h2 {
+  font-size: 2rem;
+  color: #3a2c20;
+}
+
+.testimoni-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+  justify-items: center;
+}
+
+.testi-card {
+  background: #f9f6f1;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.testi-card:hover {
+  transform: translateY(-5px);
+}
+
+.testi-card img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+/* Bagian CTA */
+.cta {
+  background: linear-gradient(135deg, #3a2c20, #6b513d);
+  color: #fff;
+  text-align: center;
+  padding: 80px 20px;
+  margin-top: 50px;
+}
+
+.cta-content h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.cta-content p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+.btn-cta {
+  background: #ffcc70;
+  color: #3a2c20;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cta:hover {
+  background: #fff;
+  color: #3a2c20;
+}
+
+/* Footer */
+.footer {
+  background: #3a2c20;
+  color: #fff;
+  text-align: center;
+  padding: 25px 10px;
+  margin-top: 40px;
+}
+
+.footer p {
+  margin-bottom: 10px;
+}
+
+.social-links img {
+  width: 28px;
+  margin: 0 10px;
+  filter: brightness(100%);
+  transition: transform 0.3s, filter 0.3s;
+}
+
+.social-links img:hover {
+  transform: scale(1.1);
+  filter: brightness(80%);
+}
+
+/* Bagian Koleksi Favorit */
+
+.favorite {
+  background: #f9f6f1;
+  padding: 70px 20px;
+  text-align: center;
+}
+
+.favorite-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.fav-item {
+  width: 240px;
+  text-align: center;
+}
+
+.fav-item img {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.fav-item img:hover {
+  transform: scale(1.05);
+}
+
+.fav-item p {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #3a2c20;
+}
+
+
+
+
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .promo-img {
+    height: 250px;
+  }
+}
