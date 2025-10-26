@@ -1,20 +1,21 @@
 <?php
-// ==== KONEKSI DATABASE ====
+// ==================== CONFIGURASI DATABASE ====================
 $host = "localhost";
 $user = "root";
 $pass = "";
-$dbname = "websitekatalogbaju";
+$db = "websitekatalogbaju";
 
-$conn = new mysqli($host, $user, $pass, $dbname);
+$conn = new mysqli($host, $user, $pass, $db);
 if ($conn->connect_error) {
   die("Koneksi gagal: " . $conn->connect_error);
 }
+
 
 // ==== HAPUS USER ====
 if (isset($_GET['hapus'])) {
   $email = $_GET['hapus'];
   $conn->query("DELETE FROM user WHERE email='$email'");
-  echo "<script>alert('User berhasil dihapus!'); window.location='../admin-page/dashboard.php';</script>";
+  echo "<script>alert('User berhasil dihapus!'); window.location='?page=dashboard';</script>";
 }
 
 // ==== PROSES UPDATE USER ====
@@ -26,7 +27,7 @@ if (isset($_POST['update'])) {
 
   $sql = "UPDATE user SET nama='$nama', alamat='$alamat', no_hp='$no_hp' WHERE email='$email'";
   if ($conn->query($sql)) {
-    echo "<script>alert('Data user berhasil diupdate!'); window.location='../admin-page/dashboard.php';</script>";
+    echo "<script>alert('Data user berhasil diupdate!'); window.location='?page=dashboard';</script>";
   } else {
     echo "<script>alert('Gagal update user');</script>";
   }
@@ -47,7 +48,7 @@ if (isset($_POST['simpan'])) {
     $sql = "INSERT INTO user (nama, email, password, alamat, no_hp) 
             VALUES ('$nama', '$email', '$password', '$alamat', '$no_hp')";
     if ($conn->query($sql) === TRUE) {
-    echo "<script>alert('User berhasil ditambahkan!'); window.location='../admin-page/dashboard.php';</script>";
+    echo "<script>alert('User berhasil ditambahkan!'); window.location='?page=dashboard';</script>";
 
     } else {
       echo "<script>alert('Gagal menambahkan user: " . addslashes($conn->error) . "');</script>";
@@ -69,7 +70,7 @@ $result = $conn->query("SELECT * FROM user ORDER BY nama ASC");
 <body class="bg-light">
 
 <div class="container mt-5">
-  <h2 class="text-center mb-4">Dashboard Admin - Website Katalog Baju</h2>
+  <h2 class="text-center text-white mb-4">Dashboard Admin - Website Katalog Baju</h2>
 
   <!-- Form Tambah User -->
   <div class="card mb-4 shadow-sm">
@@ -99,7 +100,7 @@ $result = $conn->query("SELECT * FROM user ORDER BY nama ASC");
           </div>
         </div>
         <div class="mt-3 text-end">
-          <button type="submit" name="simpan" class="btn btn-success">Simpan</button>
+          <button type="submit" name="simpan" class="btn btn-success">➕ Simpan</button>
         </div>
       </form>
     </div>

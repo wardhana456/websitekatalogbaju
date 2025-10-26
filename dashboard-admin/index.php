@@ -1,412 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- [Head] start -->
-
 <head>
-  <title>Home | Mantis Bootstrap 5 Admin Template</title>
-  <!-- [Meta] -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Mantis is made using Bootstrap 5 design framework. Download the free admin template & use it for your project.">
-  <meta name="keywords" content="Mantis, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Bootstrap Admin Template">
-  <meta name="author" content="CodedThemes">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Triftypay Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #111418;
+      --bg-sidebar: #1a1f25;
+      --accent: #00d4ff;
+      --text-light: #e6edf3;
+      --text-muted: #9ba3af;
+      --radius: 14px;
+    }
 
-  <!-- [Favicon] icon -->
-  <link rel="icon" href="./assets/images/favicon.svg" type="image/x-icon"> <!-- [Google Font] Family -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" id="main-font-link">
-<!-- [Tabler Icons] https://tablericons.com -->
-<link rel="stylesheet" href="./assets/fonts/tabler-icons.min.css" >
-<!-- [Feather Icons] https://feathericons.com -->
-<link rel="stylesheet" href="./assets/fonts/feather.css" >
-<!-- [Font Awesome Icons] https://fontawesome.com/icons -->
-<link rel="stylesheet" href="./assets/fonts/fontawesome.css" >
-<!-- [Material Icons] https://fonts.google.com/icons -->
-<link rel="stylesheet" href="./assets/fonts/material.css" >
-<!-- [Template CSS Files] -->
-<link rel="stylesheet" href="./assets/css/style.css" id="main-style-link" >
-<link rel="stylesheet" href="./assets/css/style-preset.css" >
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-family: "Public Sans", sans-serif;
+      margin: 0;
+      overflow-x: hidden;
+    }
 
+    /* === SIDEBAR === */
+    .sidebar {
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      background: var(--bg-sidebar);
+      box-shadow: 2px 0 10px rgba(0,0,0,0.4);
+      padding: 1rem 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .sidebar a {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+      border-radius: var(--radius);
+      margin: 0 1rem;
+    }
+
+    .sidebar a i {
+      font-size: 1.3rem;
+      margin-right: 0.8rem;
+    }
+
+    .sidebar a.active, .sidebar a:hover {
+      background: var(--accent);
+      color: #000;
+      font-weight: 600;
+    }
+
+    /* === HEADER === */
+    header {
+      position: fixed;
+      left: 250px;
+      top: 0;
+      right: 0;
+      height: 65px;
+      background: #20252b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      z-index: 10;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    header .search-bar {
+      background: rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      width: 300px;
+    }
+
+    header input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-light);
+      margin-left: 0.5rem;
+      width: 100%;
+    }
+
+    header .user img {
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+    }
+
+    /* === MAIN CONTENT === */
+    main {
+      margin-left: 250px;
+      padding: 100px 30px 30px; /* Tambah jarak dari header */
+      min-height: 100vh;
+      background-color: #161a1e;
+    }
+
+    .card {
+      background-color: #1f242a;
+      border: none;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    .card h5 {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* === FOOTER === */
+    footer {
+      margin-left: 250px;
+      background: #1a1f25;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 1rem 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Responsive */
+    @media (max-width: 991px) {
+      .sidebar {
+        position: fixed;
+        left: -250px;
+        transition: all 0.4s ease;
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      header {
+        left: 0;
+      }
+
+      main, footer {
+        margin-left: 0;
+      }
+    }
+  </style>
 </head>
-<!-- [Head] end -->
-<!-- [Body] Start -->
+<body>
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <h2>Triftypay</h2>
+    <a href="?page=dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a>
+    <a href="?page=kategori"><i class="bi bi-tags"></i> Kategori</a>
+    <a href="?page=produk"><i class="bi bi-box-seam"></i> Produk</a>
+    <a href="#"><i class="bi bi-people"></i> Pelanggan</a>
+    <a href="#"><i class="bi bi-cart-check"></i> Transaksi</a>
+    <a href="#"><i class="bi bi-gear"></i> Pengaturan</a>
+  </nav>
 
-<body data-pc-preset="preset-1" data-pc-direction="ltr" data-pc-theme="light">
-  <!-- [ Pre-loader ] start -->
-<div class="loader-bg">
-  <div class="loader-track">
-    <div class="loader-fill"></div>
-  </div>
-</div>
-<!-- [ Pre-loader ] End -->
- <!-- [ Sidebar Menu ] start -->
-<nav class="pc-sidebar">
-  <div class="navbar-wrapper">
-    <div class="m-header">
-      <a href="index.html" class="b-brand text-primary">
-        <!-- ========   Change your logo from here   ============ -->
-        <!-- <img src="./assets/images/logo-icon.svg" class="img-fluid logo-lg" alt="logo"> -->
-      </a>
-      <img src="./" class="img-fluid logo-lg" alt="logo">
+  <!-- Header -->
+  <header>
+    <div class="search-bar">
+      <i class="bi bi-search"></i>
+      <input type="text" placeholder="Cari sesuatu...">
     </div>
-    <div class="navbar-content">
-<li class="pc-item">
-<a href="?page=dashboard" class="pc-link">
-<span class="pc-micon"><i class="ti ti-dashboard"></i></span>
-<span class="pc-mtext">Dashboard</span>
-</a>
-</li>
-
-<li class="pc-item">
-<a href="?page=produk" class="pc-link">
-<span class="pc-micon"><i class="ti ti-package"></i></span>
-<span class="pc-mtext">Produk</span>
-</a>
-</li>
-
-
-        <li class="pc-item pc-caption">
-          <label>UI Components</label>
-          <i class="ti ti-dashboard"></i>
-        </li>
-        <li class="pc-item">
-          <!-- <a href="../elements/bc_typography.html" class="pc-link"> -->
-            <a href="#" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-typography"></i></span>
-            <span class="pc-mtext">Typography</span>
-          </a>
-        </li>
-        <li class="pc-item">
-          <!-- <a href="../elements/bc_color.html" class="pc-link"> -->
-            <a href="#" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-color-swatch"></i></span>
-            <span class="pc-mtext">Color</span>
-          </a>
-        </li>
-        <li class="pc-item">
-          <!-- <a href="../elements/icon-tabler.html" class="pc-link"> -->
-            <a href="#" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-plant-2"></i></span>
-            <span class="pc-mtext">Icons</span>
-          </a>
-        </li>
-
-      </ul>
-
+    <div class="user d-flex align-items-center">
+      <img src="./assets/images/user/avatar-2.jpg" alt="avatar" width="35" height="35" class="me-2">
+      <span>Admin</span>
     </div>
-  </div>
-</nav>
-<!-- [ Sidebar Menu ] end --> <!-- [ Header Topbar ] start -->
-<header class="pc-header">
-  <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
-<div class="me-auto pc-mob-drp">
-  <ul class="list-unstyled">
-    <!-- ======= Menu collapse Icon ===== -->
-    <li class="pc-h-item pc-sidebar-collapse">
-      <a href="#" class="pc-head-link ms-0" id="sidebar-hide">
-        <i class="ti ti-menu-2"></i>
-      </a>
-    </li>
-    <li class="pc-h-item pc-sidebar-popup">
-      <a href="#" class="pc-head-link ms-0" id="mobile-collapse">
-        <i class="ti ti-menu-2"></i>
-      </a>
-    </li>
-    <li class="dropdown pc-h-item d-inline-flex d-md-none">
-      <a
-        class="pc-head-link dropdown-toggle arrow-none m-0"
-        data-bs-toggle="dropdown"
-        href="#"
-        role="button"
-        aria-haspopup="false"
-        aria-expanded="false"
-      >
-        <i class="ti ti-search"></i>
-      </a>
-      <div class="dropdown-menu pc-h-dropdown drp-search">
-        <form class="px-3">
-          <div class="form-group mb-0 d-flex align-items-center">
-            <i data-feather="search"></i>
-            <input type="search" class="form-control border-0 shadow-none" placeholder="Search here. . .">
-          </div>
-        </form>
-      </div>
-    </li>
-    <li class="pc-h-item d-none d-md-inline-flex">
-      <form class="header-search">
-        <i data-feather="search" class="icon-search"></i>
-        <input type="search" class="form-control" placeholder="Search here. . .">
-      </form>
-    </li>
-  </ul>
-</div>
-<!-- [Mobile Media Block end] -->
-<div class="ms-auto">
-  <ul class="list-unstyled">
-    <li class="dropdown pc-h-item">
-      <a
-        class="pc-head-link dropdown-toggle arrow-none me-0"
-        data-bs-toggle="dropdown"
-        href="#"
-        role="button"
-        aria-haspopup="false"
-        aria-expanded="false"
-      >
-        <i class="ti ti-mail"></i>
-      </a>
-      <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
-        <div class="dropdown-header d-flex align-items-center justify-content-between">
-          <h5 class="m-0">Message</h5>
-          <a href="#!" class="pc-head-link bg-transparent"><i class="ti ti-x text-danger"></i></a>
-        </div>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-header px-0 text-wrap header-notification-scroll position-relative" style="max-height: calc(100vh - 215px)">
-          <div class="list-group list-group-flush w-100">
-            <a class="list-group-item list-group-item-action">
-              <div class="d-flex">
-                <div class="flex-shrink-0">
-                  <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
-                </div>
-                <div class="flex-grow-1 ms-1">
-                  <span class="float-end text-muted">3:00 AM</span>
-                  <p class="text-body mb-1">It's <b>Cristina danny's</b> birthday today.</p>
-                  <span class="text-muted">2 min ago</span>
-                </div>
-              </div>
-            </a>
-            <a class="list-group-item list-group-item-action">
-              <div class="d-flex">
-                <div class="flex-shrink-0">
-                  <img src="../assets/images/user/avatar-1.jpg" alt="user-image" class="user-avtar">
-                </div>
-                <div class="flex-grow-1 ms-1">
-                  <span class="float-end text-muted">6:00 PM</span>
-                  <p class="text-body mb-1"><b>Aida Burg</b> commented your post.</p>
-                  <span class="text-muted">5 August</span>
-                </div>
-              </div>
-            </a>
-            <a class="list-group-item list-group-item-action">
-              <div class="d-flex">
-                <div class="flex-shrink-0">
-                  <img src="../assets/images/user/avatar-3.jpg" alt="user-image" class="user-avtar">
-                </div>
-                <div class="flex-grow-1 ms-1">
-                  <span class="float-end text-muted">2:45 PM</span>
-                  <p class="text-body mb-1"><b>There was a failure to your setup.</b></p>
-                  <span class="text-muted">7 hours ago</span>
-                </div>
-              </div>
-            </a>
-            <a class="list-group-item list-group-item-action">
-              <div class="d-flex">
-                <div class="flex-shrink-0">
-                  <img src="../assets/images/user/avatar-4.jpg" alt="user-image" class="user-avtar">
-                </div>
-                <div class="flex-grow-1 ms-1">
-                  <span class="float-end text-muted">9:10 PM</span>
-                  <p class="text-body mb-1"><b>Cristina Danny </b> invited to join <b> Meeting.</b></p>
-                  <span class="text-muted">Daily scrum meeting time</span>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="dropdown-divider"></div>
-        <div class="text-center py-2">
-          <a href="#!" class="link-primary">View all</a>
-        </div>
-      </div>
-    </li>
-    <li class="dropdown pc-h-item header-user-profile">
-      <a
-        class="pc-head-link dropdown-toggle arrow-none me-0"
-        data-bs-toggle="dropdown"
-        href="#"
-        role="button"
-        aria-haspopup="false"
-        data-bs-auto-close="outside"
-        aria-expanded="false"
-      >
-        <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
-        <span>Stebin Ben</span>
-      </a>
-      <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
-        <div class="dropdown-header">
-          <div class="d-flex mb-1">
-            <div class="flex-shrink-0">
-              <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar wid-35">
-            </div>
-            <div class="flex-grow-1 ms-3">
-              <h6 class="mb-1">Stebin Ben</h6>
-              <span>UI/UX Designer</span>
-            </div>
-            <a href="#!" class="pc-head-link bg-transparent"><i class="ti ti-power text-danger"></i></a>
-          </div>
-        </div>
-        <ul class="nav drp-tabs nav-fill nav-tabs" id="mydrpTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link active"
-              id="drp-t1"
-              data-bs-toggle="tab"
-              data-bs-target="#drp-tab-1"
-              type="button"
-              role="tab"
-              aria-controls="drp-tab-1"
-              aria-selected="true"
-              ><i class="ti ti-user"></i> Profile</button
-            >
-          </li>
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link"
-              id="drp-t2"
-              data-bs-toggle="tab"
-              data-bs-target="#drp-tab-2"
-              type="button"
-              role="tab"
-              aria-controls="drp-tab-2"
-              aria-selected="false"
-              ><i class="ti ti-settings"></i> Setting</button
-            >
-          </li>
-        </ul>
-        <div class="tab-content" id="mysrpTabContent">
-          <div class="tab-pane fade show active" id="drp-tab-1" role="tabpanel" aria-labelledby="drp-t1" tabindex="0">
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-edit-circle"></i>
-              <span>Edit Profile</span>
-            </a>
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-user"></i>
-              <span>View Profile</span>
-            </a>
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-clipboard-list"></i>
-              <span>Social Profile</span>
-            </a>
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-wallet"></i>
-              <span>Billing</span>
-            </a>
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-power"></i>
-              <span>Logout</span>
-            </a>
-          </div>
-          <div class="tab-pane fade" id="drp-tab-2" role="tabpanel" aria-labelledby="drp-t2" tabindex="0">
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-help"></i>
-              <span>Support</span>
-            </a>
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-user"></i>
-              <span>Account Settings</span>
-            </a>
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-lock"></i>
-              <span>Privacy Center</span>
-            </a>
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-messages"></i>
-              <span>Feedback</span>
-            </a>
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-list"></i>
-              <span>History</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </li>
-  </ul>
-</div>
- </div>
-</header>
-<!-- [ Header ] end -->
+  </header>
 
-
-
-
-  <div class="pc-container">
-    <div class="pc-content">
-      
+  <!-- Main Content -->
+  <main>
     <?php
-$page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
-
-switch ($page) {
-    case 'dashboard':
-        include "./admin-page/dashboard.php";
+      $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+      switch ($page) {
+          case 'dashboard':
+              include "./admin-page/dashboard.php";
+              break;
+          case 'produk':
+              include "./admin-page/produk-admin.php";
+              break;
+           case 'kategori':
+        include "./admin-page/kategori.php";
         break;
-    case 'produk':
-        include "./admin-page/produk-admin.php";
-        break;
-    default:
-        include "./admin-page/dashboard.php";
-        break;
-}
-?>
+          default:
+              include "./admin-page/dashboard.php";
+              break;
+      }
+    ?>
+  </main>
 
-        
-
-
-    </div>
-  </div>
-  <!-- [ Main Content ] end -->
-  <footer class="pc-footer">
-    <div class="footer-wrapper container-fluid">
-      <div class="row">
-        <div class="col-sm my-1">
-          <p class="m-0"
-            >Mantis &#9829; crafted by Team <a href="https://themeforest.net/user/codedthemes" target="_blank">Codedthemes</a> Distributed by <a href="https://themewagon.com/">ThemeWagon</a>.</p
-          >
-        </div>
-        <div class="col-auto my-1">
-          <ul class="list-inline footer-link mb-0">
-            <li class="list-inline-item"><a href="../index.html">Home</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Triftypay | Tema Dark Modern</p>
   </footer>
 
-  <!-- [Page Specific JS] start -->
-  <script src="./assets/js/plugins/apexcharts.min.js"></script>
-  <script src="./assets/js/pages/dashboard-default.js"></script>
-  <!-- [Page Specific JS] end -->
-  <!-- Required Js -->
-  <script src="./assets/js/plugins/popper.min.js"></script>
-  <script src="./assets/js/plugins/simplebar.min.js"></script>
-  <script src="./assets/js/plugins/bootstrap.min.js"></script>
-  <script src="./assets/js/fonts/custom-font.js"></script>
-  <script src="./assets/js/pcoded.js"></script>
-  <script src="./assets/js/plugins/feather.min.js"></script>
-
-  
-  
-  
-  
-  <script>layout_change('light');</script>
-  
-  
-  
-  
-  <script>change_box_container('false');</script>
-  
-  
-  
-  <script>layout_rtl_change('false');</script>
-  
-  
-  <script>preset_change("preset-1");</script>
-  
-  
-  <script>font_change("Public-Sans");</script>
-  
-    
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-<!-- [Body] end -->
-
 </html>
