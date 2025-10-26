@@ -1,11 +1,5 @@
 <?php
-// ===== KONEKSI DATABASE =====
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "websitekatalogbaju";
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) die("Koneksi gagal: " . $conn->connect_error);
+include_once("../config/database.php");
 
 // ===== HAPUS DATA =====
 if (isset($_GET['hapus'])) {
@@ -60,7 +54,7 @@ $result = $conn->query("SELECT * FROM kategori ORDER BY kategori_id DESC");
 <body class="bg-light">
 
 <div class="container mt-5">
-  <h2 class="text-center mb-4">📦 Kelola Kategori Produk</h2>
+  <h2 class="text-center text-white mb-4">Kelola Kategori Produk</h2>
 
   <!-- Form Tambah -->
   <div class="card mb-4 shadow-sm">

@@ -168,11 +168,8 @@
     <a href="?page=dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a>
     <a href="?page=kategori"><i class="bi bi-tags"></i> Kategori</a>
     <a href="?page=produk"><i class="bi bi-box-seam"></i> Produk</a>
-    <a href="#"><i class="bi bi-people"></i> Pelanggan</a>
-    <a href="#"><i class="bi bi-cart-check"></i> Transaksi</a>
-    <a href="#"><i class="bi bi-gear"></i> Pengaturan</a>
+    <a href="?page=order"><i class="bi bi-bag-check"></i> Order</a>
   </nav>
-
   <!-- Header -->
   <header>
     <div class="search-bar">
@@ -194,11 +191,14 @@
               include "./admin-page/dashboard.php";
               break;
           case 'produk':
-              include "./admin-page/produk-admin.php";
+              include "./admin-page/produk.php";
               break;
            case 'kategori':
-        include "./admin-page/kategori.php";
-        break;
+               include "./admin-page/kategori.php";
+               break;
+           case 'order':
+               include "./admin-page/order.php";
+               break;
           default:
               include "./admin-page/dashboard.php";
               break;
