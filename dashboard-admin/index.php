@@ -165,10 +165,14 @@
   <!-- Sidebar -->
   <nav class="sidebar">
     <h2>Triftypay</h2>
-    <a href="?page=dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a>
-    <a href="?page=kategori"><i class="bi bi-tags"></i> Kategori</a>
-    <a href="?page=produk"><i class="bi bi-box-seam"></i> Produk</a>
-    <a href="?page=order"><i class="bi bi-bag-check"></i> Order</a>
+      <a href="?page=dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a>
+      <a href="?page=kategori"><i class="bi bi-tags"></i> Kategori</a>
+      <a href="?page=produk"><i class="bi bi-box-seam"></i> Produk</a>
+      <a href="?page=order"><i class="bi bi-bag-check"></i> Order</a>
+      <a href="?page=order_detail"><i class="bi bi-receipt"></i> Order Detail</a>
+      <a href="?page=cart"><i class="bi bi-cart4"></i> Cart</a>
+      <a href="?page=cart_detail"><i class="bi bi-basket"></i> Cart Detail</a>
+      <a href="?page=review"><i class="bi bi-chat-left-text"></i> Review</a>
   </nav>
   <!-- Header -->
   <header>
@@ -198,7 +202,19 @@
                break;
            case 'order':
                include "./admin-page/order.php";
+                break;
+           case 'order_detail':
+               include "./admin-page/order_detail.php";
                break;
+            case 'cart':
+                include "./admin-page/cart.php";
+                break;
+            case 'cart_detail':
+                include "./admin-page/cart_detail.php";
+                break;
+            case 'review':
+                include "./admin-page/review.php";
+                break;
           default:
               include "./admin-page/dashboard.php";
               break;

@@ -7,7 +7,7 @@
     <img src="foto/baju1.jpg" class="product-img" alt="Kategori 1">
   </div>
   <div class="col">
-    <img src="foto/baju2.png" class="product-img" alt="Kategori 2">
+    <img src="foto/baju2.jpg" class="product-img" alt="Kategori 2">
   </div>
   <div class="col">
     <img src="foto/baju3.jpg" class="product-img" alt="Kategori 3">
@@ -16,7 +16,7 @@
     <img src="foto/baju4.jpg" class="product-img" alt="Kategori 4">
   </div>
   <div class="col">
-    <img src="foto/baju5.webp" class="product-img" alt="Kategori 5">
+    <img src="foto/baju5.jpg" class="product-img" alt="Kategori 5">
   </div>
 </div>
 
@@ -182,4 +182,4 @@
    
     </div>
     </div>
-    </div>
+   
