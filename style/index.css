@@ -1,615 +1,825 @@
-/* ============================================================
-   INDEX.CSS — ThriftPay Website
-   Refactored: clean, modern, mobile-first, no redundancy
-   ============================================================ */
+/* =============================================
+   THRIFTPAY — index.css
+   Refactored: clean, modern, mobile-first
+   ============================================= */
 
-/* ---------- CSS Variables (Design Tokens) ---------- */
+/* ---------- 1. CSS VARIABLES ---------- */
 :root {
-  --clr-primary:   #1a1a2e;   /* deep navy */
-  --clr-accent:    #e94560;   /* vibrant red-pink */
-  --clr-accent2:   #f5a623;   /* warm amber */
-  --clr-bg:        #f8f6f2;   /* off-white warm */
-  --clr-surface:   #ffffff;
-  --clr-text:      #1a1a2e;
-  --clr-muted:     #7a7a8c;
-  --clr-border:    #e8e4de;
+  --clr-primary: #1a1a2e;
+  --clr-accent: #e94560;
+  --clr-accent-2: #f5a623;
+  --clr-bg: #f8f7f4;
+  --clr-surface: #ffffff;
+  --clr-text: #1a1a2e;
+  --clr-muted: #6b7280;
+  --clr-border: #e5e7eb;
 
-  --radius-sm:  8px;
-  --radius-md:  14px;
-  --radius-lg:  22px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
 
-  --shadow-sm:  0 2px 8px rgba(0,0,0,.06);
-  --shadow-md:  0 6px 24px rgba(0,0,0,.10);
-  --shadow-lg:  0 16px 48px rgba(0,0,0,.14);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.14);
 
-  --transition: 0.25s cubic-bezier(.4,0,.2,1);
-
-  --font-display: 'Playfair Display', serif;
-  --font-body:    'DM Sans', sans-serif;
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-main: "Segoe UI", system-ui, sans-serif;
 }
 
-/* ---------- Reset & Base ---------- */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ---------- 2. RESET & BASE ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-  font-family: var(--font-body);
+  font-family: var(--font-main);
   background: var(--clr-bg);
   color: var(--clr-text);
   line-height: 1.6;
   overflow-x: hidden;
 }
 
-img { display: block; max-width: 100%; height: auto; }
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
 
-a { color: inherit; text-decoration: none; }
+/* ---------- 3. SCROLL-REVEAL ANIMATION ---------- */
+/* Elemen diberi class .reveal — muncul saat masuk viewport */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Stagger delay untuk grid items */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+.reveal-stagger.visible > *:nth-child(1) {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.05s;
+}
+.reveal-stagger.visible > *:nth-child(2) {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.1s;
+}
+.reveal-stagger.visible > *:nth-child(3) {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.15s;
+}
+.reveal-stagger.visible > *:nth-child(4) {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.2s;
+}
+.reveal-stagger.visible > *:nth-child(5) {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.25s;
+}
+.reveal-stagger.visible > *:nth-child(n + 6) {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.3s;
+}
 
-ul { list-style: none; }
-
-/* ---------- Google Fonts Import ---------- */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@700;900&display=swap');
-
-
-/* ============================================================
-   NAVBAR
-   ============================================================ */
+/* ---------- 4. NAVBAR ---------- */
 .navbar-gradient {
   background: linear-gradient(135deg, var(--clr-primary) 0%, #16213e 100%);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 20px rgba(0,0,0,.2);
-  padding: .75rem 1.5rem;
-  transition: background var(--transition);
+  padding: 0.75rem 0;
+  box-shadow: var(--shadow-md);
+}
+
+/* Hamburger toggler — gunakan ikon Bootstrap default tapi warna putih */
+.navbar-gradient .navbar-toggler {
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition:
+    border-color var(--transition),
+    background var(--transition);
+}
+.navbar-gradient .navbar-toggler:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+.navbar-gradient .navbar-toggler:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+/* Ganti warna garis hamburger dari hitam → putih */
+.navbar-gradient .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255%2C255%2C255%2C0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 .navbar-gradient .nav-link {
-  color: rgba(255,255,255,.85) !important;
-  font-weight: 600;
-  letter-spacing: .4px;
-  padding: .4rem .8rem;
+  color: rgba(255, 255, 255, 0.8) !important;
+  padding: 0.4rem 0.8rem;
   border-radius: var(--radius-sm);
-  transition: color var(--transition), background var(--transition);
+  transition:
+    color var(--transition),
+    background var(--transition);
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
 }
-
 .navbar-gradient .nav-link:hover,
 .navbar-gradient .nav-link.active {
   color: #fff !important;
-  background: rgba(233,69,96,.18);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 /* Search box */
 .search-box {
+  position: relative;
   display: flex;
   align-items: center;
-  background: rgba(255,255,255,.12);
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: 50px;
-  padding: .35rem 1rem;
-  gap: .5rem;
-  transition: background var(--transition), border-color var(--transition);
 }
-
-.search-box:focus-within {
-  background: rgba(255,255,255,.2);
-  border-color: var(--clr-accent);
-}
-
 .search-box input {
-  background: transparent;
-  border: none;
-  outline: none;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-xl);
+  padding: 0.4rem 2.2rem 0.4rem 0.9rem;
   color: #fff;
-  font-size: .9rem;
-  width: 160px;
+  font-size: 0.85rem;
+  width: 180px;
+  transition:
+    background var(--transition),
+    width var(--transition);
+}
+.search-box input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+.search-box input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  width: 220px;
+}
+.search-box .bi-search {
+  position: absolute;
+  right: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  pointer-events: none;
 }
 
-.search-box input::placeholder { color: rgba(255,255,255,.55); }
-
-/* Icon buttons in topbar */
+/* Icons topbar */
 .topbar .icon {
-  font-size: 1.4rem;
-  color: rgba(255,255,255,.85);
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.85);
   cursor: pointer;
-  transition: color var(--transition), transform var(--transition);
+  padding: 0.3rem;
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--transition),
+    background var(--transition);
 }
-
 .topbar .icon:hover {
-  color: var(--clr-accent);
-  transform: scale(1.15);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
 }
 
-
-/* ============================================================
-   CAROUSEL
-   ============================================================ */
-.carousel { margin-top: 72px; } /* offset fixed navbar */
-
+/* ---------- 5. CAROUSEL ---------- */
 .carousel-item img {
+  height: 480px;
   object-fit: cover;
-  height: clamp(220px, 50vw, 520px);
-  width: 100%;
+  border-radius: 0;
+}
+@media (max-width: 768px) {
+  .carousel-item img {
+    height: 240px;
+  }
 }
 
-
-/* ============================================================
-   SECTION TITLES
-   ============================================================ */
+/* ---------- 6. SECTION TITLES ---------- */
 .section-title-home {
-  font-family: var(--font-display);
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  font-weight: 900;
-  color: var(--clr-text);
-  line-height: 1.2;
-}
-
-.section-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-size: clamp(1.4rem, 3vw, 2rem);
   font-weight: 700;
+  color: var(--clr-primary);
+  position: relative;
+  display: inline-block;
 }
-
+.section-title-home::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--clr-accent);
+  border-radius: 2px;
+  margin-top: 6px;
+}
+.section-title {
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--clr-primary);
+}
 .subtitle {
   color: var(--clr-muted);
-  font-size: .95rem;
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
 }
 
+/* ---------- 7. CATEGORY ROW ---------- */
+.category-row .col {
+  padding: 0 0.4rem;
+}
 
-/* ============================================================
-   CATEGORY ROW
-   ============================================================ */
-.category-row .product-img {
+.product-img {
   width: 100%;
-  aspect-ratio: 3/4;
+  aspect-ratio: 1/1;
   object-fit: cover;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  transition: transform var(--transition), box-shadow var(--transition);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+.product-img:hover {
+  transform: scale(1.04) translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
 
-.category-row .product-img:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: var(--shadow-md);
-}
-
-
-/* ============================================================
-   TODAY SALE — COLLAGE
-   ============================================================ */
+/* ---------- 8. TODAY SALE COLLAGE ---------- */
 .sale-collage {
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: .75rem;
-  border-radius: var(--radius-lg);
+  gap: 12px;
+  height: 420px;
+}
+.sale-item {
   overflow: hidden;
-  height: clamp(300px, 50vw, 500px);
+  border-radius: var(--radius-md);
+}
+.sale-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition);
+}
+.sale-item:hover img {
+  transform: scale(1.05);
 }
 
-.sale-item { overflow: hidden; }
-.sale-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
-.sale-item:hover img { transform: scale(1.05); }
+.sale-item.large {
+  grid-row: 1 / 3;
+}
+.sale-item.small.top {
+  grid-column: 2;
+  grid-row: 1;
+}
+.sale-item.small.bottom {
+  grid-column: 2;
+  grid-row: 2;
+}
 
-.sale-item.large { grid-row: 1 / 3; }
-.sale-item.small.top  { grid-column: 2; grid-row: 1; }
-.sale-item.small.bottom { grid-column: 2; grid-row: 2; }
+@media (max-width: 576px) {
+  .sale-collage {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    height: auto;
+  }
+  .sale-item.large {
+    grid-row: auto;
+  }
+  .sale-item img {
+    height: 200px;
+  }
+}
 
-
-/* ============================================================
-   PRODUCT CARDS (Trending / Grid)
-   ============================================================ */
+/* ---------- 9. PRODUCT CARDS ---------- */
 .product-card {
   background: var(--clr-surface);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
   overflow: hidden;
-  transition: transform var(--transition), box-shadow var(--transition);
+  border: 1px solid var(--clr-border);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
-
 .product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
 }
 
 .product-card img {
   width: 100%;
   aspect-ratio: 3/4;
   object-fit: cover;
+  transition: transform var(--transition);
+}
+.product-card:hover img {
+  transform: scale(1.04);
 }
 
 .product-card h5 {
+  font-size: 0.95rem;
   font-weight: 600;
-  font-size: 1rem;
-  padding: .75rem 1rem .25rem;
+  color: var(--clr-text);
+  margin: 0.75rem 0.9rem 0.25rem;
 }
-
 .product-card p {
+  font-size: 0.9rem;
   color: var(--clr-accent);
   font-weight: 700;
-  padding: 0 1rem;
-  font-size: .95rem;
+  margin: 0 0.9rem 0.25rem;
 }
-
 .product-card .rating {
-  padding: .2rem 1rem;
-  font-size: .85rem;
-  color: var(--clr-accent2);
+  color: var(--clr-accent-2);
+  font-size: 0.85rem;
+  margin: 0 0.9rem 0.5rem;
   letter-spacing: 1px;
 }
-
-/* Unified button style */
-.product-card button,
-.btn-promo,
-.btn-load {
-  border: none;
-  cursor: pointer;
-  border-radius: 50px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
-}
-
 .product-card button {
-  margin: .75rem 1rem 1rem;
-  padding: .55rem 1rem;
+  margin: auto 0.9rem 0.9rem;
+  padding: 0.45rem 0.9rem;
   background: var(--clr-primary);
   color: #fff;
-  font-size: .85rem;
-  letter-spacing: .3px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    transform var(--transition);
+  align-self: stretch;
 }
-
 .product-card button:hover {
   background: var(--clr-accent);
-  transform: scale(1.03);
-  box-shadow: 0 4px 14px rgba(233,69,96,.35);
+  transform: scale(1.02);
+}
+.product-card button:active {
+  transform: scale(0.98);
 }
 
-/* Load More */
+/* ---------- 10. LOAD MORE BUTTON ---------- */
 .btn-load {
+  padding: 0.65rem 2.5rem;
+  background: transparent;
+  color: var(--clr-primary);
+  border: 2px solid var(--clr-primary);
+  border-radius: var(--radius-xl);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition:
+    background var(--transition),
+    color var(--transition),
+    transform var(--transition);
+}
+.btn-load:hover {
   background: var(--clr-primary);
   color: #fff;
-  padding: .75rem 2.5rem;
-  font-size: 1rem;
-  display: block;
-  margin: 2rem auto;
+  transform: translateY(-2px);
+}
+.btn-load:active {
+  transform: scale(0.97);
 }
 
-.btn-load:hover {
-  background: var(--clr-accent);
+/* ---------- 11. SHOP PAGE — FILTERS ---------- */
+.shop-header {
+  background: linear-gradient(135deg, var(--clr-primary), #16213e);
+  color: #fff;
+  padding: 5rem 1.5rem 3rem;
+  text-align: center;
+  margin-top: 60px; /* offset for fixed navbar */
+}
+.shop-header h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+.shop-header p {
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 0.5rem;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 1.5rem;
+  justify-content: center;
+}
+.filters button {
+  padding: 0.4rem 1.2rem;
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-xl);
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    color var(--transition),
+    border-color var(--transition),
+    transform var(--transition);
+}
+.filters button:hover,
+.filters button.active {
+  background: var(--clr-primary);
+  color: #fff;
+  border-color: var(--clr-primary);
   transform: scale(1.04);
-  box-shadow: 0 6px 20px rgba(233,69,96,.35);
 }
 
-
-/* ============================================================
-   PROMO GRID (Sale Page)
-   ============================================================ */
+/* ---------- 12. PROMO GRID ---------- */
 .promo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.25rem;
+  gap: 16px;
+  padding: 0 1rem;
 }
 
 .promo-card {
   position: relative;
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  cursor: pointer;
   aspect-ratio: 3/4;
 }
-
 .promo-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform .4s ease;
+  transition: transform 0.4s ease;
+}
+.promo-card:hover .promo-img {
+  transform: scale(1.07);
 }
 
-.promo-card:hover .promo-img { transform: scale(1.07); }
-
-/* Overlay revealed on hover */
 .promo-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,.75) 55%, transparent);
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 20, 0.85) 0%,
+    transparent 55%
+  );
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 1.25rem;
   color: #fff;
-  opacity: 1;
   transition: background var(--transition);
 }
-
 .promo-card:hover .promo-overlay {
-  background: linear-gradient(to top, rgba(0,0,0,.88) 60%, rgba(0,0,0,.2));
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 20, 0.92) 0%,
+    transparent 50%
+  );
 }
 
 .badge-sale {
   position: absolute;
-  top: 1rem; right: 1rem;
+  top: 12px;
+  left: 12px;
   background: var(--clr-accent);
   color: #fff;
-  font-size: .7rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  padding: .25rem .6rem;
-  border-radius: 50px;
-  letter-spacing: .5px;
-  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.5px;
 }
 
 .promo-overlay h3 {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  margin-bottom: .25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
 }
-
 .promo-overlay p {
-  font-size: .85rem;
-  opacity: .85;
-  margin-bottom: .75rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.7rem;
+}
+.promo-overlay p s {
+  opacity: 0.6;
 }
 
 .btn-promo {
+  align-self: flex-start;
+  padding: 0.35rem 1rem;
+  background: #fff;
+  color: var(--clr-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    color var(--transition),
+    transform var(--transition);
+}
+.btn-promo:hover {
   background: var(--clr-accent);
   color: #fff;
-  padding: .5rem 1.2rem;
-  font-size: .82rem;
-  align-self: flex-start;
+  transform: scale(1.04);
 }
 
-.btn-promo:hover {
-  background: #fff;
-  color: var(--clr-accent);
-  transform: scale(1.05);
+/* ---------- 13. FAVORITE COLLECTION ---------- */
+.favorite {
+  padding: 3rem 1.5rem;
+  background: var(--clr-bg);
 }
-
-
-/* ============================================================
-   FAVORITE SECTION
-   ============================================================ */
-.favorite { padding: 3rem 1.5rem; background: var(--clr-primary); color: #fff; }
-.favorite h2 { color: #fff; }
+.favorite h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
 
 .favorite-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
   margin-top: 1.5rem;
 }
-
 .fav-item {
   border-radius: var(--radius-md);
   overflow: hidden;
-  text-align: center;
-  background: rgba(255,255,255,.06);
-  transition: transform var(--transition);
+  background: var(--clr-surface);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
 }
-
-.fav-item:hover { transform: translateY(-5px); }
-
-.fav-item img { width: 100%; aspect-ratio: 1; object-fit: cover; }
-
+.fav-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.fav-item img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
 .fav-item p {
-  padding: .6rem;
-  font-size: .88rem;
-  color: rgba(255,255,255,.8);
+  padding: 0.6rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--clr-text);
 }
 
-
-/* ============================================================
-   TESTIMONI
-   ============================================================ */
-.testimoni { padding: 3rem 1.5rem; }
+/* ---------- 14. TESTIMONI ---------- */
+.testimoni {
+  padding: 3rem 1.5rem;
+}
+.testimoni h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
 
 .testimoni-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1.5rem;
+  gap: 20px;
+  margin-top: 1.5rem;
 }
-
 .testi-card {
   background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
   border-radius: var(--radius-md);
   padding: 1.5rem;
   box-shadow: var(--shadow-sm);
-  text-align: center;
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition:
+    box-shadow var(--transition),
+    transform var(--transition);
 }
-
 .testi-card:hover {
-  transform: translateY(-4px);
   box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
 }
-
 .testi-card img {
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   object-fit: cover;
-  margin: 0 auto 1rem;
-  border: 3px solid var(--clr-accent);
+  margin-bottom: 1rem;
+  border: 2px solid var(--clr-border);
 }
-
 .testi-card p {
-  font-size: .9rem;
+  font-size: 0.9rem;
   color: var(--clr-muted);
   font-style: italic;
-  margin-bottom: .75rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
 }
-
-.testi-card h4 { font-size: .85rem; font-weight: 700; }
-
-
-/* ============================================================
-   SHOP PAGE — Header & Filters
-   ============================================================ */
-.shop-header {
-  text-align: center;
-  padding: 5rem 1.5rem 2rem;
-  background: linear-gradient(135deg, var(--clr-primary), #0f3460);
-  color: #fff;
-}
-
-.shop-header h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 900;
-}
-
-.shop-header p { opacity: .75; margin-top: .5rem; }
-
-/* Filter buttons */
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .6rem;
-  justify-content: center;
-  padding: 1.5rem 1rem;
-}
-
-.filters button {
-  border: 2px solid var(--clr-primary);
-  background: transparent;
-  color: var(--clr-primary);
-  padding: .45rem 1.25rem;
-  border-radius: 50px;
+.testi-card h4 {
+  font-size: 0.88rem;
   font-weight: 600;
-  font-size: .88rem;
-  cursor: pointer;
-  transition: background var(--transition), color var(--transition), border-color var(--transition);
+  color: var(--clr-text);
 }
 
-.filters button:hover,
-.filters button.active {
-  background: var(--clr-primary);
-  color: #fff;
-}
-
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
+/* ---------- 15. FOOTER ---------- */
 .footer {
   background: var(--clr-primary);
-  color: rgba(255,255,255,.8);
-  padding: 3rem 2rem 1.5rem;
-  margin-top: 4rem;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 3rem 1.5rem 1.5rem;
 }
-
 .footer-top {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 2.5rem;
   margin-bottom: 2rem;
 }
-
 .footer-section h4 {
   color: #fff;
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  margin-bottom: .75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.3px;
 }
-
-.footer-section ul { display: flex; flex-direction: column; gap: .4rem; }
-
-.footer-section ul a {
-  color: rgba(255,255,255,.65);
-  font-size: .9rem;
+.footer-section li {
+  margin-bottom: 0.4rem;
+}
+.footer-section a {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.88rem;
   transition: color var(--transition);
 }
+.footer-section a:hover {
+  color: #fff;
+}
 
-.footer-section ul a:hover { color: var(--clr-accent); }
-
-.footer hr { border-color: rgba(255,255,255,.12); margin: 1.5rem 0; }
-
+.social-icons li a {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.footer hr {
+  border-color: rgba(255, 255, 255, 0.12);
+  margin: 1.5rem 0;
+}
 .footer-bottom {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
 }
-
-.footer-links { display: flex; flex-wrap: wrap; gap: 1rem; }
-
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
 .footer-links a {
-  color: rgba(255,255,255,.55);
-  font-size: .8rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.8rem;
   transition: color var(--transition);
 }
+.footer-links a:hover {
+  color: #fff;
+}
+.footer-copy {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+}
 
-.footer-links a:hover { color: #fff; }
-
-.footer-copy { font-size: .8rem; color: rgba(255,255,255,.45); }
-
-/* Social icons */
-.social-icons a {
+/* ---------- 16. BACK TO TOP BUTTON ---------- */
+#backToTop {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  background: var(--clr-accent);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
   display: flex;
   align-items: center;
-  gap: .5rem;
-}
-
-
-/* ============================================================
-   SMOOTH SCROLL REVEAL (JS-triggered)
-   ============================================================ */
-.reveal {
+  justify-content: center;
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity .55s ease, transform .55s ease;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition:
+    opacity var(--transition),
+    transform var(--transition);
+  z-index: 999;
 }
-
-.reveal.visible {
+#backToTop.show {
   opacity: 1;
+  pointer-events: auto;
   transform: translateY(0);
 }
+#backToTop:hover {
+  background: var(--clr-primary);
+}
 
+/* ---------- 17. RESPONSIVE UTILITIES ---------- */
 
-/* ============================================================
-   RESPONSIVE OVERRIDES
-   ============================================================ */
-
-/* Tablet & below */
-@media (max-width: 768px) {
-  .sale-collage {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    height: auto;
+/* ── Hamburger menu: mobile collapse panel ── */
+@media (max-width: 991px) {
+  /* Panel dropdown saat hamburger diklik */
+  .navbar-gradient .navbar-collapse {
+    background: var(--clr-primary);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.75rem 1rem 1rem;
+    /* Animasi smooth buka/tutup */
+    transition:
+      max-height 0.35s ease,
+      opacity 0.25s ease;
   }
 
-  .sale-item.large,
-  .sale-item.small.top,
-  .sale-item.small.bottom {
-    grid-column: unset;
-    grid-row: unset;
-    height: 220px;
+  /* Nav links: susun vertikal, rata kiri */
+  .navbar-gradient .navbar-nav {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0 !important;
+    width: 100%;
+  }
+  .navbar-gradient .nav-item {
+    width: 100%;
+  }
+  .navbar-gradient .nav-link {
+    display: block;
+    width: 100%;
+    padding: 0.6rem 0.75rem !important;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+  }
+  .navbar-gradient .nav-link:hover {
+    background: rgba(255, 255, 255, 0.12);
   }
 
-  .promo-grid {
-    grid-template-columns: repeat(2, 1fr);
+  /* Topbar (icon + search): susun vertikal, full width */
+  .topbar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+    width: 100%;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 0.5rem;
   }
 
-  .footer-bottom {
-    flex-direction: column;
-    text-align: center;
+  /* Search input: full width di mobile */
+  .search-box {
+    width: 100%;
+  }
+  .search-box input {
+    width: 100% !important;
+    font-size: 0.9rem;
+    padding: 0.5rem 2.4rem 0.5rem 1rem;
+  }
+  .search-box input:focus {
+    width: 100% !important;
+  }
+
+  /* Icon row: tampilkan horizontal di dalam topbar */
+  .topbar .icon {
+    font-size: 1.4rem;
   }
 }
 
-/* Mobile */
-@media (max-width: 480px) {
+@media (max-width: 576px) {
   .promo-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
-
-  .favorite-grid,
-  .testimoni-grid {
-    grid-template-columns: 1fr;
+  .footer-top {
+    gap: 1.5rem;
   }
-
-  .search-box input { width: 100px; }
-
-  .filters { gap: .4rem; }
-  .filters button { font-size: .8rem; padding: .35rem .9rem; }
+  .product-card h5 {
+    font-size: 0.88rem;
+  }
 }
