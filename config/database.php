@@ -3,7 +3,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db   = "websitekatalogbaju";
+$db   = "katalog_baju";
 
 $conn = new mysqli($host, $user, $pass, $db);
 if ($conn->connect_error) {

@@ -1,149 +1,82 @@
- <section class="shop-header">
-    <h1>Our Collections</h1>
-    <p>Temukan pakaian thrift berkualitas dengan harga terbaik.</p>
-  </section>
+<?php /* ===== page/isi_shop.php — Konten halaman Shop (Super Sale) ===== */ ?>
 
-  <!-- ========== FILTER BUTTONS ========== -->
-  <div class="filters">
-    <button>Semua</button>
-    <button>Pria</button>
-    <button>Wanita</button>
-    <button>Aksesoris</button>
-    <button>Diskon</button>
+<!-- ========== SUPER SALE GRID ========== -->
+<section class="container my-5 reveal">
+  <div class="section-title text-center mb-2">🎉 Super Sale Minggu Ini! 🎉</div>
+  <p class="subtitle text-center mb-4">Promo gila-gilaan untuk koleksi kaos terbaik kami!</p>
+
+  <div class="promo-grid">
+    <?php
+    /* Data promo — idealnya dari database */
+    $promos = [
+      ['foto/baju1.jpg', 'Kaos Hitam Polos',    '-40%',        '<s>Rp120.000</s> Rp72.000', 'Beli Sekarang'],
+      ['foto/baju2.jpg', 'Kaos Coklat Vintage',  'FLASH SALE',  'Mulai Rp79.000',            'Lihat Detail'],
+      ['foto/baju3.jpg', 'Kaos Oversize Cream',  'BUY 1 GET 1', 'Stok Terbatas!',            'Ambil Sekarang'],
+      ['foto/baju4.jpg', 'Kaos Putih Casual',    '-30%',        '<s>Rp100.000</s> Rp70.000', 'Tambah ke Keranjang'],
+      ['foto/baju5.jpg', 'Kaos Biru Navy',       'BARU!',       'Diskon Pembuka 25%',        'Beli Sekarang'],
+      ['foto/baju6.jpg', 'Kaos Abu Modern',      'HOT DEAL🔥',  'Gratis Ongkir Hari Ini',   'Pesan Sekarang'],
+      ['foto/baju1.jpg', 'Kaos Hitam Polos',    '-40%',        '<s>Rp120.000</s> Rp72.000', 'Beli Sekarang'],
+      ['foto/baju2.jpg', 'Kaos Coklat Vintage',  'FLASH SALE',  'Mulai Rp79.000',            'Lihat Detail'],
+    ];
+
+    foreach ($promos as [$src, $name, $badge, $desc, $cta]) : ?>
+      <div class="promo-card">
+        <img src="<?= htmlspecialchars($src) ?>" alt="<?= htmlspecialchars($name) ?>" class="promo-img" loading="lazy">
+        <div class="promo-overlay">
+          <span class="badge-sale"><?= $badge ?></span>
+          <h3><?= htmlspecialchars($name) ?></h3>
+          <p><?= $desc /* sudah dikontrol, berisi HTML tag <s> */ ?></p>
+          <button class="btn-promo" type="button"><?= htmlspecialchars($cta) ?></button>
+        </div>
+      </div>
+    <?php endforeach; ?>
   </div>
+</section>
 
-      <div class="text-center mb-4">
-      <h3><strong>TRENDING</strong></h3>
-      <p>Lorem Ipsum</p>
-     <div class="product-grid">
-      <!-- 8 produk contoh -->
-  
-<!-- ========== PRODUCT GRID ========== -->
 
-<div class="container mt-4">
-  <div class="row g-4">
-    
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju1.jpg" alt="Produk 1">
-        <h5>Jaket Denim Oversize</h5>
-        <p>Rp 120.000</p>
-        <div class="rating">★★★★☆</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
+<!-- ========== KOLEKSI FAVORIT ========== -->
+<section class="favorite reveal">
+  <div class="container">
+    <h2 class="text-center mb-3">✨ Koleksi Favorit Minggu Ini ✨</h2>
+
+    <div class="favorite-grid">
+      <?php
+      $favorites = [
+        ['foto/fav1.jpg', 'Kaos Pastel Oversize'],
+        ['foto/fav2.jpg', 'Kaos Retro Line'],
+        ['foto/fav3.jpg', 'Kaos Monokrom'],
+      ];
+      foreach ($favorites as [$src, $label]) : ?>
+        <div class="fav-item">
+          <img src="<?= htmlspecialchars($src) ?>" alt="<?= htmlspecialchars($label) ?>" loading="lazy">
+          <p><?= htmlspecialchars($label) ?></p>
+        </div>
+      <?php endforeach; ?>
     </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju2.jpg" alt="Produk 2">
-        <h5>Kaos Vintage 90s</h5>
-        <p>Rp 80.000</p>
-        <div class="rating">★★★★★</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju3.jpg" alt="Produk 3">
-        <h5>Celana Cargo Coklat</h5>
-        <p>Rp 100.000</p>
-        <div class="rating">★★★★☆</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju4.jpg" alt="Produk 4">
-        <h5>Kemeja Flanel Classic</h5>
-        <p>Rp 90.000</p>
-        <div class="rating">★★★★★</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-        <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju5.jpg" alt="Produk 1">
-        <h5>Jaket Denim Oversize</h5>
-        <p>Rp 120.000</p>
-        <div class="rating">★★★★☆</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju6.jpg" alt="Produk 2">
-        <h5>Kaos Vintage 90s</h5>
-        <p>Rp 80.000</p>
-        <div class="rating">★★★★★</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju7.jpg" alt="Produk 3">
-        <h5>Celana Cargo Coklat</h5>
-        <p>Rp 100.000</p>
-        <div class="rating">★★★★☆</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju8.jpg" alt="Produk 4">
-        <h5>Kemeja Flanel Classic</h5>
-        <p>Rp 90.000</p>
-        <div class="rating">★★★★★</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-        <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju9.jpg" alt="Produk 1">
-        <h5>Jaket Denim Oversize</h5>
-        <p>Rp 120.000</p>
-        <div class="rating">★★★★☆</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju10.jpg" alt="Produk 2">
-        <h5>Kaos Vintage 90s</h5>
-        <p>Rp 80.000</p>
-        <div class="rating">★★★★★</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju11.jpg" alt="Produk 3">
-        <h5>Celana Cargo Coklat</h5>
-        <p>Rp 100.000</p>
-        <div class="rating">★★★★☆</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju12.jpg" alt="Produk 4">
-        <h5>Kemeja Flanel Classic</h5>
-        <p>Rp 90.000</p>
-        <div class="rating">★★★★★</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <!-- Tambah produk lainnya di sini -->
-    
   </div>
-</div>
+</section>
+
+
+<!-- ========== TESTIMONI ========== -->
+<section class="testimoni reveal">
+  <div class="container">
+    <h2 class="text-center mb-2">Apa Kata Mereka 💬</h2>
+    <p class="subtitle text-center mb-4">Ulasan jujur dari pelanggan setia kami</p>
+
+    <div class="testimoni-grid">
+      <?php
+      $testimonials = [
+        ['https://i.imgur.com/8Km9tLL.png', '"Kualitas bajunya lembut banget dan nyaman dipakai. Udah beli 3 kali!"', 'Rina, Bandung'],
+        ['https://i.imgur.com/TIRbG8Y.png', '"Desainnya keren, cocok buat nongkrong. Pengiriman juga cepat!"',         'Arif, Jakarta'],
+        ['https://i.imgur.com/jlEHZqv.png', '"Harga ramah di kantong tapi kualitas premium. Bakal order lagi!"',       'Laila, Surabaya'],
+      ];
+      foreach ($testimonials as [$avatar, $quote, $author]) : ?>
+        <div class="testi-card">
+          <img src="<?= htmlspecialchars($avatar) ?>" alt="<?= htmlspecialchars($author) ?>">
+          <p><?= htmlspecialchars($quote) ?></p>
+          <h4>— <?= htmlspecialchars($author) ?></h4>
+        </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>

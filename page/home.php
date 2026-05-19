@@ -1,185 +1,111 @@
-<div class="section-title-home mb-2 mt-5 ">Kategori</div>
-<p class="subtitle ">Deskripsi Kategori</p>
+<?php /* ===== page/home.php — Konten halaman Beranda ===== */ ?>
 
-<!-- isi kategori -->
-<div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 g-3 category-row">
-  <div class="col">
-    <img src="foto/baju1.jpg" class="product-img" alt="Kategori 1">
-  </div>
-  <div class="col">
-    <img src="foto/baju2.jpg" class="product-img" alt="Kategori 2">
-  </div>
-  <div class="col">
-    <img src="foto/baju3.jpg" class="product-img" alt="Kategori 3">
-  </div>
-  <div class="col">
-    <img src="foto/baju4.jpg" class="product-img" alt="Kategori 4">
-  </div>
-  <div class="col">
-    <img src="foto/baju5.jpg" class="product-img" alt="Kategori 5">
-  </div>
-</div>
+<!-- ========== KATEGORI ========== -->
+<section class="container my-5 reveal">
+  <div class="section-title-home mb-1 ms-1">Kategori</div>
+  <p class="subtitle ms-1 mb-3">Temukan koleksi favoritmu</p>
 
-<div class="container mb-5">
-  <div class="section-title-home mb-2 mt-5 ">Today Sale!!</div>
-  <p class="subtitle ">Deskripsi Sale</p>
+  <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 g-3 category-row">
+    <?php
+    /* Loop kategori — ganti dengan data dinamis dari DB jika ada */
+    $categories = [
+      ['foto/baju1.jpg', 'Jaket'],
+      ['foto/baju2.jpg', 'Kaos'],
+      ['foto/baju3.jpg', 'Celana'],
+      ['foto/baju4.jpg', 'Kemeja'],
+      ['foto/baju5.jpg', 'Aksesoris'],
+    ];
+    foreach ($categories as [$src, $label]) : ?>
+      <div class="col">
+        <img src="<?= htmlspecialchars($src) ?>" class="product-img" alt="<?= htmlspecialchars($label) ?>">
+      </div>
+    <?php endforeach; ?>
+  </div>
+</section>
+
+
+<!-- ========== TODAY SALE ========== -->
+<section class="container mb-5 reveal">
+  <div class="section-title-home mb-1">Today Sale!! 🔥</div>
+  <p class="subtitle mb-3">Promo terbatas — jangan sampai kehabisan!</p>
 
   <div class="sale-collage">
     <div class="sale-item large">
-      <img src="foto/promosi1.jpg" alt="Sale 1">
+      <img src="foto/promosi1.jpg" alt="Promo Utama" loading="lazy">
     </div>
     <div class="sale-item small top">
-      <img src="foto/promosi1.jpg" alt="Sale 2">
+      <img src="foto/promosi1.jpg" alt="Promo 2" loading="lazy">
     </div>
     <div class="sale-item small bottom">
-      <img src="foto/promosi1.jpg" alt="Sale 3">
+      <img src="foto/promosi1.jpg" alt="Promo 3" loading="lazy">
     </div>
   </div>
-</div>
+</section>
 
 
-    
-     <div class="text-center mb-4">
-      <h3><strong>TRENDING</strong></h3>
-      <p>Lorem Ipsum</p>
-     <div class="product-grid">
-      <!-- 8 produk contoh -->
-  
-<!-- ========== PRODUCT GRID ========== -->
+<!-- ========== TRENDING PRODUCTS ========== -->
+<section class="container my-5 reveal">
+  <div class="text-center mb-4">
+    <h3 class="section-title"><strong>TRENDING</strong></h3>
+    <p class="subtitle">Pilihan terpopuler minggu ini</p>
+  </div>
 
-<div class="container mt-4">
   <div class="row g-4">
-    
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto\baju1.jpg" alt="Produk 1">
-        <h5>Jaket Denim Oversize</h5>
-        <p>Rp 120.000</p>
-        <div class="rating">★★★★☆</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
+    <?php
+    /* Data produk — idealnya diambil dari database */
+    $products = [
+      ['foto/baju1.jpg',  'Jaket Denim Oversize', 'Rp 120.000', 4],
+      ['foto/baju2.jpg',  'Kaos Vintage 90s',     'Rp 80.000',  5],
+      ['foto/baju3.jpg',  'Celana Cargo Coklat',  'Rp 100.000', 4],
+      ['foto/baju4.jpg',  'Kemeja Flanel Classic', 'Rp 90.000', 5],
+      ['foto/baju5.jpg',  'Jaket Denim Oversize', 'Rp 120.000', 4],
+      ['foto/baju6.jpg',  'Kaos Vintage 90s',     'Rp 80.000',  5],
+      ['foto/baju7.jpg',  'Celana Cargo Coklat',  'Rp 100.000', 4],
+      ['foto/baju8.jpg',  'Kemeja Flanel Classic', 'Rp 90.000', 5],
+      ['foto/baju9.jpg',  'Jaket Denim Oversize', 'Rp 120.000', 4],
+      ['foto/baju10.jpg', 'Kaos Vintage 90s',     'Rp 80.000',  5],
+      ['foto/baju11.jpg', 'Celana Cargo Coklat',  'Rp 100.000', 4],
+      ['foto/baju12.jpg', 'Kemeja Flanel Classic', 'Rp 90.000', 5],
+      ['foto/baju9.jpg',  'Jaket Denim Oversize', 'Rp 120.000', 4],
+      ['foto/baju10.jpg', 'Kaos Vintage 90s',     'Rp 80.000',  5],
+      ['foto/baju11.jpg', 'Celana Cargo Coklat',  'Rp 100.000', 4],
+      ['foto/baju12.jpg', 'Kemeja Flanel Classic', 'Rp 90.000', 5],
+      ['foto/baju1.jpg',  'Jaket Denim Oversize', 'Rp 120.000', 4],
+      ['foto/baju2.jpg',  'Kaos Vintage 90s',     'Rp 80.000',  5],
+      ['foto/baju3.jpg',  'Celana Cargo Coklat',  'Rp 100.000', 4],
+      ['foto/baju4.jpg',  'Kemeja Flanel Classic', 'Rp 90.000', 5],
+      ['foto/baju5.jpg',  'Jaket Denim Oversize', 'Rp 120.000', 4],
+      ['foto/baju6.jpg',  'Kaos Vintage 90s',     'Rp 80.000',  5],
+      ['foto/baju7.jpg',  'Celana Cargo Coklat',  'Rp 100.000', 4],
+      ['foto/baju8.jpg',  'Kemeja Flanel Classic', 'Rp 90.000', 5],
+      ['foto/baju9.jpg',  'Jaket Denim Oversize', 'Rp 120.000', 4],
+      ['foto/baju10.jpg', 'Kaos Vintage 90s',     'Rp 80.000',  5],
+      ['foto/baju11.jpg', 'Celana Cargo Coklat',  'Rp 100.000', 4],
+      ['foto/baju12.jpg', 'Kemeja Flanel Classic', 'Rp 90.000', 5],
+      ['foto/baju9.jpg',  'Jaket Denim Oversize', 'Rp 120.000', 4],
+      ['foto/baju10.jpg', 'Kaos Vintage 90s',     'Rp 80.000',  5],
+      ['foto/baju11.jpg', 'Celana Cargo Coklat',  'Rp 100.000', 4],
+      ['foto/baju12.jpg', 'Kemeja Flanel Classic', 'Rp 90.000', 5],
+    ];
 
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju2.jpg" alt="Produk 2">
-        <h5>Kaos Vintage 90s</h5>
-        <p>Rp 80.000</p>
-        <div class="rating">★★★★★</div>
-        <button>Tambah ke Keranjang</button>
+    foreach ($products as [$src, $name, $price, $stars]) :
+      /* Render bintang rating */
+      $rating = str_repeat('★', $stars) . str_repeat('☆', 5 - $stars);
+    ?>
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="product-card">
+          <img src="<?= htmlspecialchars($src) ?>" alt="<?= htmlspecialchars($name) ?>" loading="lazy">
+          <h5><?= htmlspecialchars($name) ?></h5>
+          <p><?= htmlspecialchars($price) ?></p>
+          <div class="rating"><?= $rating ?></div>
+          <button type="button">Tambah ke Keranjang</button>
+        </div>
       </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju3.jpg" alt="Produk 3">
-        <h5>Celana Cargo Coklat</h5>
-        <p>Rp 100.000</p>
-        <div class="rating">★★★★☆</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju4.jpg" alt="Produk 4">
-        <h5>Kemeja Flanel Classic</h5>
-        <p>Rp 90.000</p>
-        <div class="rating">★★★★★</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-        <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju5.jpg" alt="Produk 1">
-        <h5>Jaket Denim Oversize</h5>
-        <p>Rp 120.000</p>
-        <div class="rating">★★★★☆</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju6.jpg" alt="Produk 2">
-        <h5>Kaos Vintage 90s</h5>
-        <p>Rp 80.000</p>
-        <div class="rating">★★★★★</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju7.jpg" alt="Produk 3">
-        <h5>Celana Cargo Coklat</h5>
-        <p>Rp 100.000</p>
-        <div class="rating">★★★★☆</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju8.jpg" alt="Produk 4">
-        <h5>Kemeja Flanel Classic</h5>
-        <p>Rp 90.000</p>
-        <div class="rating">★★★★★</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-        <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju9.jpg" alt="Produk 1">
-        <h5>Jaket Denim Oversize</h5>
-        <p>Rp 120.000</p>
-        <div class="rating">★★★★☆</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju10.jpg" alt="Produk 3">
-        <h5>Celana Cargo Coklat</h5>
-        <p>Rp 100.000</p>
-        <div class="rating">★★★★☆</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju11.jpg" alt="Produk 4">
-        <h5>Kemeja Flanel Classic</h5>
-        <p>Rp 90.000</p>
-        <div class="rating">★★★★★</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-3">
-      <div class="product-card">
-        <img src="foto/baju12.jpg" alt="Produk 4">
-        <h5>Kemeja Flanel Classic</h5>
-        <p>Rp 90.000</p>
-        <div class="rating">★★★★★</div>
-        <button>Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <!-- Tambah produk lainnya di sini -->
-    
+    <?php endforeach; ?>
   </div>
-</div>
 
-
-    <div class="mt-5"> <button class="btn-load ">Load More</button></div>
-  
-
-   
-    </div>
-    </div>
-   
+  <!-- Load More -->
+  <div class="text-center mt-5">
+    <button class="btn-load" type="button">Load More</button>
+  </div>
+</section>

@@ -1,144 +1,77 @@
-<div class="container my-5">
-  <div class="section-title text-center mb-2">🎉 Super Sale Minggu Ini! 🎉</div>
-  <p class="subtitle text-center mb-4">Nikmati promo gila-gilaan untuk koleksi kaos terbaik kami!</p>
+<?php /* ===== page/isi_produk.php — Konten halaman Produk / Shop Collection ===== */ ?>
 
-  <div class="promo-grid">
-    <!-- Produk 1 -->
-    <div class="promo-card">
-      <img src="foto/baju1.jpg" alt="Kaos Hitam" class="promo-img">
-      <div class="promo-overlay">
-        <span class="badge-sale">-40%</span>
-        <h3>Kaos Hitam Polos</h3>
-        <p><s>Rp120.000</s> Rp72.000</p>
-        <button class="btn-promo">Beli Sekarang</button>
-      </div>
-    </div>
+<!-- ========== SHOP HEADER ========== -->
+<section class="shop-header reveal">
+  <h1>Our Collections</h1>
+  <p>Temukan pakaian thrift berkualitas dengan harga terbaik.</p>
+</section>
 
-    <!-- Produk 2 -->
-    <div class="promo-card">
-      <img src="foto/baju2.png" alt="Kaos Coklat" class="promo-img">
-      <div class="promo-overlay">
-        <span class="badge-sale">FLASH SALE</span>
-        <h3>Kaos Coklat Vintage</h3>
-        <p>Mulai Rp79.000</p>
-        <button class="btn-promo">Lihat Detail</button>
-      </div>
-    </div>
 
-    <!-- Produk 3 -->
-    <div class="promo-card">
-      <img src="foto/baju3.jpg" alt="Kaos Oversize" class="promo-img">
-      <div class="promo-overlay">
-        <span class="badge-sale">BUY 1 GET 1</span>
-        <h3>Kaos Oversize Cream</h3>
-        <p>Stok Terbatas!</p>
-        <button class="btn-promo">Ambil Sekarang</button>
-      </div>
-    </div>
-
-    <!-- Produk 4 -->
-    <div class="promo-card">
-      <img src="foto/baju4.jpg" alt="Kaos Putih" class="promo-img">
-      <div class="promo-overlay">
-        <span class="badge-sale">-30%</span>
-        <h3>Kaos Putih Casual</h3>
-        <p><s>Rp100.000</s> Rp70.000</p>
-        <button class="btn-promo">Tambah ke Keranjang</button>
-      </div>
-    </div>
-
-    <!-- Produk 5 -->
-    <div class="promo-card">
-      <img src="foto/baju5.webp" alt="Kaos Biru" class="promo-img">
-      <div class="promo-overlay">
-        <span class="badge-sale">BARU!</span>
-        <h3>Kaos Biru Navy</h3>
-        <p>Diskon Pembuka 25%</p>
-        <button class="btn-promo">Beli Sekarang</button>
-      </div>
-    </div>
-
-    <!-- Produk 6 -->
-    <div class="promo-card">
-      <img src="foto/baju6.jpg" alt="Kaos Abu" class="promo-img">
-      <div class="promo-overlay">
-        <span class="badge-sale">HOT DEAL🔥</span>
-        <h3>Kaos Abu Modern</h3>
-        <p>Gratis Ongkir Hari Ini</p>
-        <button class="btn-promo">Pesan Sekarang</button>
-      </div>
-    </div>
-
-<!-- Produk 1 -->
-    <div class="promo-card">
-      <img src="foto/baju1.jpg" alt="Kaos Hitam" class="promo-img">
-      <div class="promo-overlay">
-        <span class="badge-sale">-40%</span>
-        <h3>Kaos Hitam Polos</h3>
-        <p><s>Rp120.000</s> Rp72.000</p>
-        <button class="btn-promo">Beli Sekarang</button>
-      </div>
-    </div>
-
-    <!-- Produk 2 -->
-    <div class="promo-card">
-      <img src="foto/baju2.png" alt="Kaos Coklat" class="promo-img">
-      <div class="promo-overlay">
-        <span class="badge-sale">FLASH SALE</span>
-        <h3>Kaos Coklat Vintage</h3>
-        <p>Mulai Rp79.000</p>
-        <button class="btn-promo">Lihat Detail</button>
-      </div>
-    </div>
-
-  </div>
+<!-- ========== FILTER BUTTONS ========== -->
+<div class="filters reveal">
+  <?php
+  $filters = ['Semua', 'Pria', 'Wanita', 'Aksesoris', 'Diskon'];
+  foreach ($filters as $i => $f) : ?>
+    <button
+      type="button"
+      class="<?= $i === 0 ? 'active' : '' ?>"
+      data-filter="<?= strtolower($f) ?>"
+    >
+      <?= htmlspecialchars($f) ?>
+    </button>
+  <?php endforeach; ?>
 </div>
 
-<section class="favorite">
-  <h2 class="text-center mb-3">✨ Koleksi Favorit Minggu Ini ✨</h2>
-  <div class="favorite-grid">
-    <div class="fav-item"><img src="foto/fav1.jpg" alt="Koleksi 1"><p>Kaos Pastel Oversize</p></div>
-    <div class="fav-item"><img src="foto/fav2.jpg" alt="Koleksi 2"><p>Kaos Retro Line</p></div>
-    <div class="fav-item"><img src="foto/fav3.jpg" alt="Koleksi 3"><p>Kaos Monokrom</p></div>
+
+<!-- ========== PRODUCT GRID ========== -->
+<section class="container mt-4 mb-5 reveal">
+  <div class="text-center mb-4">
+    <h3 class="section-title"><strong>TRENDING</strong></h3>
+    <p class="subtitle">Koleksi terpilih untuk kamu</p>
+  </div>
+
+  <div class="row g-4">
+    <?php
+    $products = [
+      ['foto/baju1.jpg',  'Jaket Denim Oversize', 'Rp 120.000', 4],
+      ['foto/baju2.jpg',  'Kaos Vintage 90s',     'Rp 80.000',  5],
+      ['foto/baju3.jpg',  'Celana Cargo Coklat',  'Rp 100.000', 4],
+      ['foto/baju4.jpg',  'Kemeja Flanel Classic', 'Rp 90.000', 5],
+      ['foto/baju5.jpg',  'Jaket Denim Oversize', 'Rp 120.000', 4],
+      ['foto/baju6.jpg',  'Kaos Vintage 90s',     'Rp 80.000',  5],
+      ['foto/baju7.jpg',  'Celana Cargo Coklat',  'Rp 100.000', 4],
+      ['foto/baju8.jpg',  'Kemeja Flanel Classic', 'Rp 90.000', 5],
+      ['foto/baju9.jpg',  'Jaket Denim Oversize', 'Rp 120.000', 4],
+      ['foto/baju10.jpg', 'Kaos Vintage 90s',     'Rp 80.000',  5],
+      ['foto/baju11.jpg', 'Celana Cargo Coklat',  'Rp 100.000', 4],
+      ['foto/baju12.jpg', 'Kemeja Flanel Classic', 'Rp 90.000', 5],
+    ];
+
+    foreach ($products as [$src, $name, $price, $stars]) :
+      $rating = str_repeat('★', $stars) . str_repeat('☆', 5 - $stars);
+    ?>
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="product-card">
+          <img src="<?= htmlspecialchars($src) ?>" alt="<?= htmlspecialchars($name) ?>" loading="lazy">
+          <h5><?= htmlspecialchars($name) ?></h5>
+          <p><?= htmlspecialchars($price) ?></p>
+          <div class="rating"><?= $rating ?></div>
+          <button type="button">Tambah ke Keranjang</button>
+        </div>
+      </div>
+    <?php endforeach; ?>
   </div>
 </section>
 
 
-
-
- <!-- Bagian Testimoni -->
-  <section class="testimoni my-5">
-    <h2 class="text-center mb-3">Apa Kata Mereka 💬</h2>
-    <p class="subtitle text-center mb-4">Beberapa ulasan jujur dari pelanggan setia kami</p>
-
-    <div class="testimoni-grid">
-      <div class="testi-card">
-        <img src="https://i.imgur.com/8Km9tLL.png" alt="User 1">
-        <p>"Kualitas bajunya lembut banget dan nyaman dipakai. Udah beli 3 kali!"</p>
-        <h4>- Rina, Bandung</h4>
-      </div>
-      <div class="testi-card">
-        <img src="https://i.imgur.com/TIRbG8Y.png" alt="User 2">
-        <p>"Desainnya keren, cocok buat nongkrong. Pengiriman juga cepat!"</p>
-        <h4>- Arif, Jakarta</h4>
-      </div>
-      <div class="testi-card">
-        <img src="https://i.imgur.com/jlEHZqv.png" alt="User 3">
-        <p>"Harga ramah di kantong tapi kualitas premium. Bakal order lagi!"</p>
-        <h4>- Laila, Surabaya</h4>
-      </div>
-    </div>
-  </section>
-
-  <!-- Bagian Ajakan Promo -->
-  <section class="cta">
-    <div class="cta-content">
-      <h2>💥 Jangan Lewatkan Promo Spesial Minggu Ini!</h2>
-      <p>Koleksi kaos terbaik kami sedang diskon besar-besaran. Buruan sebelum kehabisan!</p>
-      <button class="btn-cta">Belanja Sekarang</button>
-    </div>
-  </section>
-
-
-
-
+<!-- ========== Filter JS (vanilla, ringan) ========== -->
+<script>
+  /* Filter tombol — tandai active dan bisa dikembangkan untuk filter produk */
+  document.querySelectorAll('.filters button').forEach(btn => {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      /* TODO: tambahkan logika filter produk berdasarkan data-filter="..." */
+    });
+  });
+</script>

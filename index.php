@@ -1,11 +1,6 @@
-<?php
-include 'component/header.php';         // Memanggil header
-include 'component/navbar.php'; // Memanggil komponen navbar
-include 'component/carausel.php';   // Memanggil komponen shop
-?>
-
-
-<?php
-include 'page/home.php';         
-include 'component/footer.php'; // Memanggil komponen footer
-?>
+<?php /* ===== index.php — Halaman Beranda ===== */ ?>
+<?php include 'component/header.php'; ?>
+<?php include 'component/navbar.php'; ?>
+<?php include 'component/carausel.php'; ?>
+<?php include 'page/home.php'; ?>
+<?php include 'component/footer.php'; ?>
