@@ -1,5 +1,5 @@
 <?php
-include_once("../../config/database.php");
+include_once(__DIR__ . "/../config/database.php");
 
 /* =========================
    AMBIL DATA KATEGORI
@@ -19,38 +19,41 @@ $queryProduk = mysqli_query($conn, "
 ");
 ?>
 
-<!-- ========== SHOP HEADER ========== -->
+<style>
+  .product-card-link {
+    display: block;
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+  .product-card img {
+    transition: transform 0.3s ease;
+  }
+  .product-card-link:hover img {
+    transform: scale(1.03);
+  }
+</style>
+
 <section class="shop-header reveal">
   <h1>Our Collections</h1>
   <p>Temukan pakaian thrift berkualitas dengan harga terbaik.</p>
 </section>
 
 
-<!-- ========== FILTER BUTTONS ========== -->
 <div class="filters reveal">
 
-  <!-- tombol semua -->
   <button type="button" class="filter-btn active" data-filter="semua">
-
     Semua
-
   </button>
 
-  <!-- kategori dari database -->
   <?php while ($k = mysqli_fetch_assoc($queryKategori)): ?>
-
     <button type="button" class="filter-btn" data-filter="<?= strtolower($k['nama_kategori']) ?>">
-
       <?= htmlspecialchars($k['nama_kategori']) ?>
-
     </button>
-
   <?php endwhile; ?>
 
 </div>
 
 
-<!-- ========== PRODUCT GRID ========== -->
 <section class="container mt-4 mb-5 reveal">
 
   <div class="text-center mb-4">
@@ -71,28 +74,25 @@ $queryProduk = mysqli_query($conn, "
 
         <div class="product-card">
 
-          <!-- gambar -->
-          <img src="<?= htmlspecialchars($p['gambar_url']) ?>" alt="<?= htmlspecialchars($p['nama_produk']) ?>"
-            loading="lazy">
+          <a href="detail_produk.php?id=<?= $p['produk_id'] ?>" class="product-card-link">
+            <img src="<?= htmlspecialchars($p['gambar_url']) ?>" alt="<?= htmlspecialchars($p['nama_produk']) ?>" loading="lazy">
 
-          <!-- nama produk -->
-          <h5>
-            <?= htmlspecialchars($p['nama_produk']) ?>
-          </h5>
+            <h5>
+              <?= htmlspecialchars($p['nama_produk']) ?>
+            </h5>
+          </a>
 
-          <!-- harga -->
           <p>
             Rp <?= number_format($p['harga'], 0, ',', '.') ?>
           </p>
 
-          <!-- kategori -->
+
           <small>
             <?= htmlspecialchars($p['nama_kategori']) ?>
           </small>
 
           <br><br>
 
-          <!-- tombol -->
           <button type="button">
             Tambah ke Keranjang
           </button>
@@ -107,7 +107,6 @@ $queryProduk = mysqli_query($conn, "
 
 </section>
 
-<!-- ========== FILTER SCRIPT ========== -->
 <script>
 
   const filterButtons =

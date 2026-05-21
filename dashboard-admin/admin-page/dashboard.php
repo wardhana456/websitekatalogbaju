@@ -4,53 +4,17 @@ include_once("../config/database.php");
 // ==================== HAPUS USER ====================
 if (isset($_GET['hapus'])) {
     $user_id = (int) $_GET['hapus'];
-    $conn->query("DELETE FROM user WHERE user_id = $user_id");
-    echo "<script>alert('User berhasil dihapus!'); window.location='?page=dashboard';</script>";
-}
-
-// ==================== UPDATE USER ====================
-if (isset($_POST['update'])) {
-    $user_id = (int) $_POST['user_id'];
-    $nama    = $conn->real_escape_string($_POST['nama']);
-    $alamat  = $conn->real_escape_string($_POST['alamat']);
-    $no_hp   = $conn->real_escape_string($_POST['no_hp']);
-
-    $sql = "UPDATE user SET 
-                nama   = '$nama',
-                alamat = '$alamat',
-                no_hp  = '$no_hp'
-            WHERE user_id = $user_id";
-
-    if ($conn->query($sql)) {
-        echo "<script>alert('Data user berhasil diupdate!'); window.location='?page=dashboard';</script>";
+    
+    // Menggunakan prepared statement agar aman dari SQL Injection
+    $stmt = $conn->prepare("DELETE FROM user WHERE user_id = ?");
+    $stmt->bind_param("i", $user_id);
+    
+    if ($stmt->execute()) {
+        echo "<script>alert('User berhasil dihapus!'); window.location='?page=dashboard';</script>";
     } else {
-        echo "<script>alert('Gagal update user');</script>";
+        echo "<script>alert('Gagal menghapus user karena data masih terikat dengan transaksi/keranjang belanja!'); window.location='?page=dashboard';</script>";
     }
-}
-
-// ==================== TAMBAH USER BARU ====================
-if (isset($_POST['simpan'])) {
-    $nama     = $conn->real_escape_string($_POST['nama']);
-    $email    = $conn->real_escape_string($_POST['email']);
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $alamat   = $conn->real_escape_string($_POST['alamat']);
-    $no_hp    = $conn->real_escape_string($_POST['no_hp']);
-
-    // Cek email agar tidak duplikat
-    $cek = $conn->query("SELECT email FROM user WHERE email = '$email'");
-    if ($cek->num_rows > 0) {
-        echo "<script>alert('Email sudah terdaftar, gunakan email lain!');</script>";
-    } else {
-        $sql = "INSERT INTO user (nama, email, password, alamat, no_hp)
-                VALUES ('$nama', '$email', '$password', '$alamat', '$no_hp')";
-        
-        if ($conn->query($sql)) {
-            $last_id = $conn->insert_id;
-            echo "<script>alert('User berhasil ditambahkan! ID User: $last_id'); window.location='?page=dashboard';</script>";
-        } else {
-            echo "<script>alert('Gagal menambahkan user: " . addslashes($conn->error) . "');</script>";
-        }
-    }
+    $stmt->close();
 }
 
 // ==================== AMBIL DATA USER ====================
@@ -61,126 +25,142 @@ $result = $conn->query("SELECT * FROM user ORDER BY user_id DESC");
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Manajemen User</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        body {
+            background-color: #fcfcfc;
+            color: #000;
+            font-family: Arial, sans-serif;
+        }
+        .dashboard-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+        }
+        /* Desain Boxy Minimalis Tanpa Rounded Corners */
+        .card-thrift {
+            border: 2px solid #000;
+            border-radius: 0;
+            background-color: #fff;
+        }
+        .card-thrift-header {
+            background-color: #000;
+            color: #fff;
+            border-radius: 0;
+            padding: 15px 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+        /* Styling Tabel Minimalis */
+        .table-thrift {
+            border-collapse: collapse;
+        }
+        .table-thrift thead {
+            border-bottom: 2px solid #000;
+        }
+        .table-thrift th {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            padding: 12px;
+            background-color: #fafafa;
+        }
+        .table-thrift td {
+            font-size: 0.9rem;
+            padding: 14px 12px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        /* Tombol Aksi */
+        .btn-delete-thrift {
+            background-color: #fff;
+            color: #dc3545;
+            border: 1px solid #dc3545;
+            border-radius: 0;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            transition: all 0.2s ease;
+        }
+        .btn-delete-thrift:hover {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .badge-count {
+            background-color: #fff;
+            color: #000;
+            font-weight: 800;
+            border-radius: 0;
+            padding: 5px 10px;
+            font-size: 0.75rem;
+        }
+    </style>
 </head>
-<body class="bg-light">
+<body>
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4 text-white">Dashboard Admin - Website Katalog Baju</h2>
-
-    <!-- FORM TAMBAH USER -->
-    <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-primary text-white">Tambah User Baru</div>
-        <div class="card-body">
-            <form method="POST">
-                <div class="row g-3">
-                    <div class="col-md-4">
-                        <label class="form-label">Nama</label>
-                        <input type="text" name="nama" class="form-control" required>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" required>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Alamat</label>
-                        <input type="text" name="alamat" class="form-control" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">No HP</label>
-                        <input type="text" name="no_hp" class="form-control" required>
-                    </div>
-                </div>
-                <div class="mt-3 text-end">
-                    <button type="submit" name="simpan" class="btn btn-success">➕ Simpan</button>
-                </div>
-            </form>
-        </div>
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-2 border-dark">
+        <h2 class="dashboard-title m-0">Customer Management</h2>
+        <span class="text-muted small font-monospace">Role: Admin</span>
     </div>
 
-    <!-- TABEL DATA USER -->
-    <div class="card shadow-sm">
-        <div class="card-header bg-dark text-white">Data User</div>
-        <div class="card-body">
-            <table class="table table-bordered table-hover align-middle">
-                <thead class="table-secondary text-center">
-                    <tr>
-                        <th width="5%">ID</th>
-                        <th width="20%">Nama</th>
-                        <th width="20%">Email</th>
-                        <th width="25%">Alamat</th>
-                        <th width="15%">No HP</th>
-                        <th width="15%">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if ($result->num_rows > 0): ?>
-                        <?php while ($row = $result->fetch_assoc()): ?>
+    <div class="card card-thrift shadow-sm">
+        <div class="card-thrift-header d-flex justify-content-between align-items-center">
+            <span>Daftar Akun Terdaftar</span>
+            <span class="badge badge-count">TOTAL: <?= $result ? $result->num_rows : 0 ?> USER</span>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-thrift table-hover align-middle mb-0">
+                    <thead>
+                        <tr class="text-center">
+                            <th width="8%">ID User</th>
+                            <th width="22%" class="text-start">Nama Lengkap</th>
+                            <th width="22%" class="text-start">Email</th>
+                            <th width="28%" class="text-start">Alamat Pengiriman</th>
+                            <th width="12%">No. HP</th>
+                            <th width="8%">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if ($result && $result->num_rows > 0): ?>
+                            <?php while ($row = $result->fetch_assoc()): ?>
+                                <tr>
+                                    <td class="text-center fw-bold font-monospace">#<?= $row['user_id'] ?></td>
+                                    <td class="fw-semibold text-dark"><?= htmlspecialchars($row['nama']) ?></td>
+                                    <td class="text-secondary"><?= htmlspecialchars($row['email']) ?></td>
+                                    <td class="text-muted text-wrap"><?= htmlspecialchars($row['alamat'] ?? '-') ?></td>
+                                    <td class="text-center font-monospace"><?= htmlspecialchars($row['no_hp'] ?? '-') ?></td>
+                                    <td class="text-center">
+                                        <a href="?hapus=<?= $row['user_id'] ?>" 
+                                           class="btn btn-delete-thrift d-inline-flex align-items-center gap-1" 
+                                           onclick="return confirm('Yakin ingin menghapus permanen akun <?= htmlspecialchars($row['nama']) ?>?')">
+                                            <i class="bi bi-trash3"></i> Hapus
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        <?php else: ?>
                             <tr>
-                                <td class="text-center"><?= $row['user_id'] ?></td>
-                                <td><?= htmlspecialchars($row['nama']) ?></td>
-                                <td><?= htmlspecialchars($row['email']) ?></td>
-                                <td><?= htmlspecialchars($row['alamat']) ?></td>
-                                <td><?= htmlspecialchars($row['no_hp']) ?></td>
-                                <td class="text-center">
-                                    <a href="?edit=<?= $row['user_id'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="?hapus=<?= $row['user_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus user ini?')">Hapus</a>
+                                <td colspan="6" class="text-center text-muted py-5 font-monospace">
+                                    <i class="bi bi-people mb-2 d-block fs-3"></i> Belum ada customer yang terdaftar.
                                 </td>
                             </tr>
-                        <?php endwhile; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="6" class="text-center text-muted">Belum ada data user</td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
-
-<!-- MODAL EDIT USER -->
-<?php 
-if (isset($_GET['edit'])):
-    $user_id  = (int) $_GET['edit'];
-    $dataEdit = $conn->query("SELECT * FROM user WHERE user_id = $user_id")->fetch_assoc();
-?>
-<div class="modal fade show" style="display:block; background-color:rgba(0,0,0,0.5)">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form method="POST">
-                <div class="modal-header bg-warning">
-                    <h5 class="modal-title">Edit User</h5>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="user_id" value="<?= $dataEdit['user_id'] ?>">
-                    <div class="mb-3">
-                        <label class="form-label">Nama</label>
-                        <input type="text" name="nama" class="form-control" value="<?= htmlspecialchars($dataEdit['nama']) ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Alamat</label>
-                        <input type="text" name="alamat" class="form-control" value="<?= htmlspecialchars($dataEdit['alamat']) ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">No HP</label>
-                        <input type="text" name="no_hp" class="form-control" value="<?= htmlspecialchars($dataEdit['no_hp']) ?>" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a href="?page=dashboard" class="btn btn-secondary">Batal</a>
-                    <button type="submit" name="update" class="btn btn-warning">Simpan Perubahan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
 
 <?php $conn->close(); ?>
 </body>

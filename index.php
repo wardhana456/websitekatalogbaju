@@ -1,6 +1,17 @@
-<?php /* ===== index.php — Halaman Beranda ===== */ ?>
-<?php include 'component/header.php'; ?>
-<?php include 'component/navbar.php'; ?>
-<?php include 'component/carausel.php'; ?>
-<?php include 'page/home.php'; ?>
-<?php include 'component/footer.php'; ?>
+<?php
+session_start();
+
+/* =========================
+CEK STATUS LOGIN
+========================= */
+
+// Jika sudah login → masuk ke beranda
+if (isset($_SESSION['user_id'])) {
+    header("Location: beranda.php");
+    exit;
+}
+
+// Jika belum login → arahkan ke login
+header("Location: login.php");
+exit;
+?>
