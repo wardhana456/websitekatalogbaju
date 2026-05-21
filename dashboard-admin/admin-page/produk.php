@@ -135,10 +135,13 @@ DOCTYPE html>
               <option value="">-- Pilih File Gambar --</option>
               <?php
               $files = glob("foto/*.{jpg,jpeg,png,webp}", GLOB_BRACE);
-              foreach ($files as $file) {
+              if ($files) {
+                foreach ($files as $file) {
                   $nama_file = basename($file);
-                  echo "<option value='foto/$nama_file'>$nama_file</option>";
+                  echo "<option value='foto/" . htmlspecialchars($nama_file) . "'>" . htmlspecialchars($nama_file) . "</option>";
+                }
               }
+
               ?>
             </select>
           </div>
@@ -306,13 +309,6 @@ DOCTYPE html>
     </select>
 
 </div>
-              </select>
-            </div>
-            <div class="col-md-2 text-center">
-              <img id="previewEdit" src="<?= !empty($dataEdit['gambar_url']) ? $dataEdit['gambar_url'] : 'https://placehold.co/120x120?text=No+Image' ?>" class="preview-img" alt="Preview">
-            </div>
-          </div>
-        </div>
         <div class="modal-footer">
           <a href="?page=produk" class="btn btn-secondary">Batal</a>
           <button type="submit" name="update" class="btn btn-warning fw-bold">Simpan Perubahan</button>
