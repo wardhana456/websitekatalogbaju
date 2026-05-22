@@ -1,17 +1,17 @@
 <?php
 session_start();
 
-/* =========================
-CEK STATUS LOGIN
-========================= */
+/* ========================================================
+   LOGIC: ALUR MASUK PERTAMA KALI (GUEST ACCESS)
+======================================================== */
 
-// Jika sudah login → masuk ke beranda
-if (isset($_SESSION['user_id'])) {
-    header("Location: beranda.php");
-    exit;
+// Jika user belum login dan belum terdaftar sebagai guest, set session role menjadi guest
+if (!isset($_SESSION['user_id']) && !isset($_SESSION['role'])) {
+    $_SESSION['role'] = 'guest';
+    $_SESSION['nama_user'] = 'Guest';
 }
 
-// Jika belum login → arahkan ke login
-header("Location: login.php");
+// Langsung arahkan semuanya ke beranda.php / home.php
+header("Location: beranda.php");
 exit;
 ?>

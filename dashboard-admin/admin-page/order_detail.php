@@ -1,155 +1,133 @@
 <?php
 include_once("../config/database.php");
 
-// ===== Ambil daftar order untuk dropdown =====
-$order_result = $conn->query("SELECT order_id FROM orders ORDER BY order_id ASC");
-
-// ===== Ambil daftar produk untuk dropdown =====
-$produk_result = $conn->query("SELECT produk_id, nama_produk, harga FROM produk ORDER BY produk_id ASC");
-
-// ===== Hapus Order Detail =====
-if (isset($_GET['hapus'])) {
-  $id = intval($_GET['hapus']);
-  $conn->query("DELETE FROM order_detail WHERE order_detail_id=$id");
-  echo "<script>alert('Order Detail berhasil dihapus!'); window.location='?page=order_detail';</script>";
-}
-
-// ===== Tambah Order Detail =====
-if (isset($_POST['simpan'])) {
-  $order_id = intval($_POST['order_id']);
-  $produk_id = intval($_POST['produk_id']);
-  $kuantitas = intval($_POST['kuantitas']);
-  $subtotal = floatval($_POST['subtotal']);
-
-  $sql = "INSERT INTO order_detail (order_id, produk_id, kuantitas, subtotal)
-          VALUES ('$order_id', '$produk_id', '$kuantitas', '$subtotal')";
-  if ($conn->query($sql)) {
-    echo "<script>alert('Order Detail berhasil ditambahkan!'); window.location='?page=order_detail';</script>";
-  } else {
-    echo "<script>alert('Gagal menambahkan order detail: " . addslashes($conn->error) . "');</script>";
-  }
-}
-
-// ===== Ambil Data Order Detail =====
+// ========================================
+// AMBIL DATA ORDER DETAIL
+// ========================================
 $result = $conn->query("
-  SELECT od.*, o.order_id, p.nama_produk, p.harga
-  FROM order_detail od
-  JOIN orders o ON od.order_id = o.order_id
-  JOIN produk p ON od.produk_id = p.produk_id
-  ORDER BY od.order_detail_id DESC
+    SELECT 
+        od.order_detail_id, 
+        od.order_id, 
+        p.nama_produk, 
+        od.kuantitas, 
+        od.subtotal
+    FROM order_detail od
+    JOIN orders o ON od.order_id = o.order_id
+    JOIN produk p ON od.produk_id = p.produk_id
+    ORDER BY od.order_detail_id DESC
 ");
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Kelola Order Detail - Admin Dashboard</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Order Detail - Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        body {
+            background-color: #fcfcfc;
+            color: #000;
+            font-family: Arial, sans-serif;
+        }
+        .dashboard-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+        }
+        /* Boxy Design (Tanpa Rounded Corners) */
+        .card-thrift {
+            border: 2px solid #000;
+            border-radius: 0;
+            background-color: #fff;
+        }
+        .card-thrift-header {
+            background-color: #000;
+            color: #fff;
+            border-radius: 0;
+            padding: 14px 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+        }
+        /* Table Customization */
+        .table-thrift thead {
+            border-bottom: 2px solid #000;
+        }
+        .table-thrift th {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            padding: 12px;
+            background-color: #fafafa;
+        }
+        .table-thrift td {
+            font-size: 0.9rem;
+            padding: 14px 12px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+    </style>
 </head>
-<body class="bg-light">
+<body>
 
-<div class="container mt-5">
-  <h2 class="text-center text-white mb-4">Kelola Order Detail</h2>
+<div class="container mt-5 mb-5">
 
-  <!-- FORM TAMBAH ORDER DETAIL -->
-  <div class="card mb-4 shadow-sm">
-    <div class="card-header bg-primary text-white">Tambah Order Detail Baru</div>
-    <div class="card-body">
-      <form method="POST">
-        <div class="row g-3">
-
-          <!-- Order -->
-          <div class="col-md-3">
-            <label>Order</label>
-            <select name="order_id" class="form-select" required>
-              <option value="">Pilih Order</option>
-              <?php
-              if ($order_result->num_rows > 0) {
-                while ($order = $order_result->fetch_assoc()) {
-                  echo "<option value='{$order['order_id']}'>Order ID: {$order['order_id']}</option>";
-                }
-              }
-              ?>
-            </select>
-          </div>
- 
-          <!-- Produk -->
-          <div class="col-md-3">
-            <label>Produk</label>
-            <select name="produk_id" class="form-select" required>
-              <option value="">Pilih Produk</option>
-              <?php
-              if ($produk_result->num_rows > 0) {
-                while ($produk = $produk_result->fetch_assoc()) {
-                  echo "<option value='{$produk['produk_id']}'>{$produk['nama_produk']} - Rp " . number_format($produk['harga'], 0, ',', '.') . "</option>";
-                }
-              }
-              ?>
-            </select>
-          </div>
-
-          <!-- Kuantitas -->
-          <div class="col-md-3">
-            <label>Kuantitas</label>
-            <input type="number" name="kuantitas" value="1" min="1" class="form-control" required>
-          </div>
-
-          <!-- Subtotal -->
-          <div class="col-md-3">
-            <label>Subtotal (Rp)</label>
-            <input type="number" step="0.01" name="subtotal" class="form-control" required>
-          </div>
-        </div>
-
-        <div class="mt-3 text-end">
-          <button type="submit" name="simpan" class="btn btn-success">💾 Simpan Detail</button>
-        </div>
-      </form>
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-2 border-dark">
+        <h2 class="dashboard-title m-0">Order Detail</h2>
+        <span class="text-muted small font-monospace">Role: Admin</span>
     </div>
-  </div>
 
-  <!-- TABEL ORDER DETAIL -->
-  <div class="card shadow-sm">
-    <div class="card-header bg-dark text-white">Data Order Detail</div>
-    <div class="card-body">
-      <table class="table table-bordered table-hover">
-        <thead class="table-secondary">
-          <tr>
-            <th>ID Detail</th>
-            <th>Order ID</th>
-            <th>Produk</th>
-            <th>Kuantitas</th>
-            <th>Subtotal</th>
-            <th>Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-          if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-              echo "<tr>
-                      <td>{$row['order_detail_id']}</td>
-                      <td>{$row['order_id']}</td>
-                      <td>{$row['nama_produk']}</td>
-                      <td>{$row['kuantitas']}</td>
-                      <td>Rp " . number_format($row['subtotal'], 0, ',', '.') . "</td>
-                      <td>
-                        <a href='?page=order_detail&hapus={$row['order_detail_id']}' class='btn btn-danger btn-sm' onclick='return confirm(\"Yakin hapus detail ini?\")'>Hapus</a>
-                      </td>
-                    </tr>";
-            }
-          } else {
-            echo "<tr><td colspan='6' class='text-center'>Belum ada data order detail</td></tr>";
-          }
-          ?>
-        </tbody>
-      </table>
+    <div class="card card-thrift shadow-sm">
+        <div class="card-thrift-header d-flex justify-content-between align-items-center">
+            <span>Daftar Item Rincian Order</span>
+            <span class="badge bg-light text-dark border font-monospace px-2 py-1" style="border-radius:0;">TOTAL: <?= $result->num_rows ?> DATA</span>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-thrift table-hover align-middle mb-0">
+                    <thead>
+                        <tr class="text-center">
+                            <th width="12%">ID Detail</th>
+                            <th width="12%">ID Order</th>
+                            <th width="36%" class="text-start">Nama Produk</th>
+                            <th width="15%">Kuantitas</th>
+                            <th width="25%" class="text-end">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if ($result && $result->num_rows > 0): ?>
+                            <?php while ($row = $result->fetch_assoc()): ?>
+                                <tr>
+                                    <td class="text-center fw-bold font-monospace">#<?= $row['order_detail_id']; ?></td>
+                                    <td class="text-center font-monospace">#<?= $row['order_id']; ?></td>
+                                    <td class="fw-semibold text-dark"><?= htmlspecialchars($row['nama_produk']); ?></td>
+                                    <td class="text-center font-monospace"><?= $row['kuantitas']; ?> Pcs</td>
+                                    <td class="text-end fw-bold text-dark font-monospace">Rp <?= number_format($row['subtotal'], 0, ',', '.'); ?></td>
+                                </tr>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="5" class="text-center text-muted py-5 font-monospace">
+                                    <i class="bi bi-box-seam d-block fs-3 mb-2"></i> Belum ada data rincian order.
+                                </td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 </body>
 </html>
 
-<?php $conn->close(); ?>
+<?php
+$conn->close();
+?>

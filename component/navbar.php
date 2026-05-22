@@ -125,7 +125,7 @@ $firstLetter = strtoupper(substr($namaUser, 0, 1));
 
     <!-- LOGO -->
     <a class="navbar-brand" href="index.php">
-      <img src="foto/ThriftPay (1).png" alt="ThriftPay Logo" width="160">
+      <img src="foto/ThriftPay.png" alt="ThriftPay Logo" width="160">
     </a>
 
     <!-- HAMBURGER -->
@@ -254,7 +254,7 @@ $firstLetter = strtoupper(substr($namaUser, 0, 1));
               </li>
 
               <li>
-                <a class="dropdown-item" href="register.php">
+                <a class="dropdown-item" href="sign_in.php">
                   <i class="bi bi-person-plus me-2"></i>
                   Daftar
                 </a>

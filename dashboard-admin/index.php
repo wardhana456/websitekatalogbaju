@@ -1,3 +1,25 @@
+<?php
+include_once("../config/database.php");
+
+// ==================== LOGIKA HAPUS USER (DARI KODE ANDA) ====================
+if (isset($_GET['hapus'])) {
+    $user_id = (int) $_GET['hapus'];
+    
+    $stmt = $conn->prepare("DELETE FROM user WHERE user_id = ?");
+    $stmt->bind_param("i", $user_id);
+    
+    if ($stmt->execute()) {
+        echo "<script>alert('User berhasil dihapus!'); window.location='?page=dashboard';</script>";
+    } else {
+        echo "<script>alert('Gagal menghapus user karena data masih terikat dengan transaksi/keranjang belanja!'); window.location='?page=dashboard';</script>";
+    }
+    $stmt->close();
+}
+
+// Mengambil parameter halaman saat ini, default-nya adalah 'dashboard'
+$page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,23 +30,35 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #111418;
-      --bg-sidebar: #1a1f25;
-      --accent: #00d4ff;
-      --text-light: #e6edf3;
-      --text-muted: #9ba3af;
-      --radius: 14px;
+      --bg-light: #fcfcfc;
+      --bg-sidebar: #ffffff;
+      --bg-header: #ffffff;
+      --accent-dark: #000000;
+      --text-dark: #000000;
+      --text-muted: #6c757d;
+      --border-color: #000000;
     }
 
     body {
-      background-color: var(--bg-dark);
-      color: var(--text-light);
-      font-family: "Public Sans", sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      font-family: Arial, sans-serif;
       margin: 0;
       overflow-x: hidden;
     }
 
-    /* === SIDEBAR === */
+    .logo-container{
+        text-align:center;
+        margin-bottom:30px;
+        padding:10px;
+    }
+
+    .logo-img{
+        width:180px;
+        height: 80px;
+    }
+
+    /* === SIDEBAR (TEMA TERANG & BOXY) === */
     .sidebar {
       width: 250px;
       position: fixed;
@@ -32,39 +66,44 @@
       left: 0;
       height: 100vh;
       background: var(--bg-sidebar);
-      box-shadow: 2px 0 10px rgba(0,0,0,0.4);
-      padding: 1rem 0;
+      border-right: 2px solid var(--border-color);
+      padding: 1.5rem 0;
       display: flex;
       flex-direction: column;
     }
 
     .sidebar h2 {
       text-align: center;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 2rem;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
     }
 
     .sidebar a {
-      color: var(--text-muted);
+      color: #333333;
       text-decoration: none;
       padding: 0.8rem 1.5rem;
       display: flex;
       align-items: center;
-      transition: all 0.3s ease;
-      border-radius: var(--radius);
-      margin: 0 1rem;
+      transition: all 0.2s ease;
+      margin: 0.1rem 0;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .sidebar a i {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       margin-right: 0.8rem;
     }
 
+    /* Efek Hover & Aktif Boxy (Hitam Solid) */
     .sidebar a.active, .sidebar a:hover {
-      background: var(--accent);
-      color: #000;
-      font-weight: 600;
+      background: var(--accent-dark);
+      color: #ffffff;
     }
 
     /* === HEADER === */
@@ -74,70 +113,35 @@
       top: 0;
       right: 0;
       height: 65px;
-      background: #20252b;
+      background: var(--bg-header);
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       padding: 0 2rem;
       z-index: 10;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-
-    header .search-bar {
-      background: rgba(255,255,255,0.1);
-      border-radius: var(--radius);
-      padding: 0.5rem 1rem;
-      display: flex;
-      align-items: center;
-      width: 300px;
-    }
-
-    header input {
-      background: transparent;
-      border: none;
-      outline: none;
-      color: var(--text-light);
-      margin-left: 0.5rem;
-      width: 100%;
+      border-bottom: 2px solid var(--border-color);
     }
 
     header .user img {
-      border-radius: 50%;
-      border: 2px solid var(--accent);
+      border-radius: 0; /* Mengubah jadi boxy sesuai tema */
+      border: 2px solid var(--border-color);
+    }
+
+    header .user span {
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
     }
 
     /* === MAIN CONTENT === */
     main {
       margin-left: 250px;
-      padding: 100px 30px 30px; /* Tambah jarak dari header */
-      min-height: 100vh;
-      background-color: #161a1e;
+      padding: 95px 30px 30px; 
+      min-height: calc(100vh - 57px); 
+      background-color: var(--bg-light);
     }
 
-    .card {
-      background-color: #1f242a;
-      border: none;
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      color: var(--text-light);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-    }
-
-    .card h5 {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    /* === FOOTER === */
-    footer {
-      margin-left: 250px;
-      background: #1a1f25;
-      color: var(--text-muted);
-      text-align: center;
-      padding: 1rem 0;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
 
     /* Responsive */
     @media (max-width: 991px) {
@@ -145,6 +149,7 @@
         position: fixed;
         left: -250px;
         transition: all 0.4s ease;
+        z-index: 100;
       }
 
       .sidebar.active {
@@ -155,41 +160,29 @@
         left: 0;
       }
 
-      main, footer {
-        margin-left: 0;
-      }
     }
   </style>
 </head>
 <body>
+
   <!-- Sidebar -->
   <nav class="sidebar">
-    <h2>Triftypay</h2>
-      <a href="?page=dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a>
-      <a href="?page=kategori"><i class="bi bi-tags"></i> Kategori</a>
-      <a href="?page=produk"><i class="bi bi-box-seam"></i> Produk</a>
-      <a href="?page=order"><i class="bi bi-bag-check"></i> Order</a>
-      <a href="?page=order_detail"><i class="bi bi-receipt"></i> Order Detail</a>
-      <a href="?page=cart"><i class="bi bi-cart4"></i> Cart</a>
-      <a href="?page=cart_detail"><i class="bi bi-basket"></i> Cart Detail</a>
-      <a href="?page=review"><i class="bi bi-chat-left-text"></i> Review</a>
+    <div class="logo-container">
+    <img src="../foto/ThriftPay dashboard.png" alt="Triftypay Logo" class="logo-img">
+    </div>
+    <a href="?page=dashboard" class="<?= $page == 'dashboard' ? 'active' : '' ?>"><i class="bi bi-speedometer2"></i> Dashboard</a>
+    <a href="?page=kategori" class="<?= $page == 'kategori' ? 'active' : '' ?>"><i class="bi bi-tags"></i> Kategori</a>
+    <a href="?page=produk" class="<?= $page == 'produk' ? 'active' : '' ?>"><i class="bi bi-box-seam"></i> Produk</a>
+    <a href="?page=order" class="<?= $page == 'order' ? 'active' : '' ?>"><i class="bi bi-bag-check"></i> Order</a>
+    <a href="?page=order_detail" class="<?= $page == 'order_detail' ? 'active' : '' ?>"><i class="bi bi-receipt"></i> Order Detail</a>
+    <a href="?page=cart" class="<?= $page == 'cart' ? 'active' : '' ?>"><i class="bi bi-cart4"></i> Cart</a>
+    <a href="?page=cart_detail" class="<?= $page == 'cart_detail' ? 'active' : '' ?>"><i class="bi bi-basket"></i> Cart Detail</a>
+    <a href="?page=review" class="<?= $page == 'review' ? 'active' : '' ?>"><i class="bi bi-chat-left-text"></i> Review</a>
   </nav>
-  <!-- Header -->
-  <header>
-    <div class="search-bar">
-      <i class="bi bi-search"></i>
-      <input type="text" placeholder="Cari sesuatu...">
-    </div>
-    <div class="user d-flex align-items-center">
-      <img src="./assets/images/user/avatar-2.jpg" alt="avatar" width="35" height="35" class="me-2">
-      <span>Admin</span>
-    </div>
-  </header>
 
   <!-- Main Content -->
   <main>
     <?php
-      $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
       switch ($page) {
           case 'dashboard':
               include "./admin-page/dashboard.php";
@@ -197,24 +190,24 @@
           case 'produk':
               include "./admin-page/produk.php";
               break;
-           case 'kategori':
-               include "./admin-page/kategori.php";
-               break;
-           case 'order':
-               include "./admin-page/order.php";
-                break;
-           case 'order_detail':
-               include "./admin-page/order_detail.php";
-               break;
-            case 'cart':
-                include "./admin-page/cart.php";
-                break;
-            case 'cart_detail':
-                include "./admin-page/cart_detail.php";
-                break;
-            case 'review':
-                include "./admin-page/review.php";
-                break;
+          case 'kategori':
+              include "./admin-page/kategori.php";
+              break;
+          case 'order':
+              include "./admin-page/order.php";
+              break;
+          case 'order_detail':
+              include "./admin-page/order_detail.php";
+              break;
+          case 'cart':
+              include "./admin-page/cart.php";
+              break;
+          case 'cart_detail':
+              include "./admin-page/cart_detail.php";
+              break;
+          case 'review':
+              include "./admin-page/review.php";
+              break;
           default:
               include "./admin-page/dashboard.php";
               break;
@@ -222,10 +215,6 @@
     ?>
   </main>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Triftypay | Tema Dark Modern</p>
-  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

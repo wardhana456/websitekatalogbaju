@@ -305,8 +305,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <div class="auth-wrapper">
 
   <div class="auth-side">
-    <img src="foto/ThriftPay (1).png" alt="ThriftPay Logo">
-    <span class="auth-badge">✦ Thrift Store #1</span>
+    <img src="foto/ThriftPay.png" alt="ThriftPay Logo">
     <h2>Selamat Datang Kembali!</h2>
     <p>Masuk ke akunmu dan temukan koleksi thrift terbaik dengan harga yang ramah di kantong.</p>
   </div>

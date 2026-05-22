@@ -350,7 +350,7 @@ textarea{
 
   <div class="auth-side">
 
-    <img src="foto/ThriftPay (1).png" alt="Logo">
+    <img src="foto/ThriftPay.png" alt="Logo">
 
     <h2>
       <?= $is_edit ? 'Perbarui Data' : 'Bergabung Sekarang' ?>
@@ -369,8 +369,8 @@ textarea{
     <h3><?= $is_edit ? 'Edit Akun User' : 'Buat Akun' ?></h3>
 
     <p class="auth-sub">
-      Kolom bertanda
-      <span class="required-star">*</span>
+      Kolom 
+      <span class="required-star"></span>
       wajib diisi.
     </p>
 
@@ -594,7 +594,6 @@ textarea{
     </form>
 
     <div class="auth-divider">
-      Kembali ke panel
     </div>
 
     <div class="auth-switch">
