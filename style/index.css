@@ -86,17 +86,31 @@ body {
 /* =========================================================
    CAROUSEL
 ========================================================= */
-.carousel,
-.carousel-inner,
-.carousel-item,
-.carousel-item img {
-  width: 100%;
-  max-width: 100%;
+
+#carouselExampleSlidesOnly {
+    width: 100%;
 }
 
-.carousel-item img {
-  height: 100vh;
-  object-fit: cover;
+#carouselExampleSlidesOnly .carousel-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    #carouselExampleSlidesOnly .carousel-item img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    #carouselExampleSlidesOnly .carousel-item img {
+        width: 100%;
+        height: auto;
+    }
 }
 
 /* =========================================================

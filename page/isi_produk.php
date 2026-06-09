@@ -89,29 +89,71 @@ $queryProduk = mysqli_query($conn, "
 ?>
 
 <style>
-  .product-card-link {
-    display: block;
-    color: #000 !important;
-    text-decoration: none !important;
-  }
-  .product-card h5 {
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 15px;
-  }
-  .product-card img {
-    transition: transform 0.3s ease;
-  }
-  .product-card-link:hover img {
-    transform: scale(1.03);
-  }
-  .product-item small {
-    color: #6c757d;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    letter-spacing: 1px;
+.product-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    transition: .3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-img {
+    width: 100%;
+    height: 250px; /* Tinggi semua gambar sama */
+    object-fit: cover; /* Crop otomatis */
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.product-card h5 {
+    min-height: 50px; /* Tinggi judul sama */
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.product-card p {
+    font-weight: bold;
+    color: #000;
+}
+
+.product-card button {
+    margin-top: auto;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+    .product-img {
+        height: 220px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .product-img {
+        height: 200px;
+    }
+}
   }
 </style>
 
@@ -149,13 +191,15 @@ $queryProduk = mysqli_query($conn, "
       <div class="col-12 col-sm-6 col-lg-3 product-item" data-category="<?= strtolower($p['nama_kategori'] ?? '') ?>">
         <div class="product-card">
 
-          <!-- Setiap card produk dibungkus Form POST agar tombol berfungsi independen -->
           <form action="" method="POST">
-            <!-- Hidden input untuk mengirim ID produk yang dipilih -->
             <input type="hidden" name="produk_id" value="<?= $p['produk_id'] ?>">
 
             <a href="detail_produk.php?id=<?= $p['produk_id'] ?>" class="product-card-link">
-              <img src="<?= htmlspecialchars($p['gambar_url']) ?>" alt="<?= htmlspecialchars($p['nama_produk']) ?>" loading="lazy">
+              <img class="product-img"
+                   src="<?= htmlspecialchars($p['gambar_url']) ?>"
+                   alt="<?= htmlspecialchars($p['nama_produk']) ?>"
+                   loading="lazy">
+
               <h5><?= htmlspecialchars($p['nama_produk']) ?></h5>
             </a>
 
@@ -167,8 +211,7 @@ $queryProduk = mysqli_query($conn, "
               <?= htmlspecialchars($p['nama_kategori'] ?? 'Uncategorized') ?>
             </small>
 
-            <!-- Tipe tombol diubah ke submit dan ditambahkan atribut name -->
-            <button type="submit" name="add_to_cart_direct" class="btn btn-dark w-100 py-2">
+            <button type="submit" name="add_to_cart_direct" class="btn btn-dark w-100 py-2 mt-auto">
               <i class="bi bi-cart-plus me-2"></i> Tambah ke Keranjang
             </button>
           </form>
@@ -177,7 +220,7 @@ $queryProduk = mysqli_query($conn, "
       </div>
 
     <?php endwhile; ?>
-  </div>
+</div>
 
 </section>
 
